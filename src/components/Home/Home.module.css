@@ -1,0 +1,239 @@
+.firstPage {
+  min-height: 89vh;
+  position: relative;
+  z-index: 10;
+}
+
+.firstPage > * {
+  opacity: 1;
+  position: relative;
+}
+
+.firstPage::before {
+  content : "" ;
+  position: absolute;
+  top : 0 ;
+  left : 0 ;
+  width: 100%;
+  height: 20%;
+  z-index: 0;
+  font-family: "Poppins", sans-serif;
+  color: #0c0c0c;
+  background-color: #ffcbcb;
+  overflow-x: hidden;
+  background-image: url(../../assets/hero-bg.png); 
+  background-size: cover;
+  
+}
+.codeIcon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+
+ 
+}
+.link {
+  color: white !important;
+  text-decoration: none; 
+ 
+}
+
+.scanMessage {
+  
+  font-size: 15px;
+  color: #000000; 
+  margin-bottom: 25px;
+}
+.centerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; 
+}
+
+.scanButton {
+  background-color: #FA8072; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 80px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.scanButton:hover {
+  background-color: #FFA07A; 
+}
+
+.cameraIcon {
+  margin-right: 5px; 
+}
+
+
+
+.numbers{
+    background-color: var(--primary-blue) ;
+    padding: 10px 0px;
+    max-width: 100%;
+    height: auto;
+    text-align: center;
+    overflow: hidden;
+    margin-top: 0px;
+    margin: 50px;
+}
+.numbers .row{
+    margin: 0px 0px ;
+}
+.numbers h2{
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px 0px;
+    color: whitesmoke !important;
+    
+}
+
+.numbers h6{
+    text-transform: uppercase;
+    color: #fff;
+   
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+.title {
+  color : var(--primary-blue) !important ;
+
+  font-size: 35px;
+  font-weight: bold;
+  width: 80%;
+  margin: 10px 0px;
+  line-height: 50px;
+}
+
+.genericBtn {
+  background-color : var(--bayern-blue)  ;
+  box-shadow: #444 0 10px 20px -10px;
+
+  border-radius: 999px;
+ 
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+  margin: 20px 10px 20px 0px;
+  transition: .2s ease;
+}
+
+.p {
+  font-size: 16px;
+  line-height: 28px;
+  color: #333;
+  margin-top: 15px;
+}
+
+.genericBtn:hover {
+  background-color: var(--secondary-blue);
+}
+
+  .ingredients{
+    margin-top: 50px;
+    max-width: 100%;
+    height: auto;
+    text-align: left;
+    overflow: hidden;
+  }
+
+ .ingredients ul {
+  list-style: upper-roman;
+ }
+.ingredients img{
+   width: 100%;
+    border-radius: 10px;
+    max-height: 400px ;
+}
+
+
+  .paralex {
+    background: url(../../assets/4.jpg) center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    padding: 30px 0px;
+    text-align: center;
+  }
+  .paralex .row{
+    margin: 50px 0px;
+  }
+  .paralex h2{
+    font-size: 35px;
+    font-weight: bold;
+    width: 100%;
+    margin: 20px 0px;
+    color: #5E5DF0;
+   
+    line-height: 50px;
+  }
+
+  .paralex p {
+    font-size: 16px;
+    line-height: 28px;
+    color: #000000;
+   
+    margin-top: 15px;
+    margin: 20px;
+    font-weight: bold;
+}
+
+.paralex a {
+    color: #5E5DF0;
+    font-size: 20px;
+    margin: 20px 0px;
+   
+    text-decoration: none !important;
+    font-weight: bold;
+}
+
+.blogs{
+  padding: 5px 0px;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  background-color: #74EBD5;
+background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
+
+  
+  
+}
+
+.downloadContainer {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  flex-direction: column !important;
+  gap : 20px !important ;
+  color: black ;
+   padding: 0px 30px !important;
+}
+
+.downloadIcons {
+ display: flex;
+ gap: 0px !important ;
+ flex-direction: column;
+ 
+}
+

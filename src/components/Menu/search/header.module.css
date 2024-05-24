@@ -1,0 +1,103 @@
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 1rem 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+  }
+  
+  .header__logo {
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color: var(--black);
+  }
+  
+  .header__logo span {
+    color: var(--green);
+  }
+  
+  .header__nav-link {
+    font-size: 1.7rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    color: var(--light-color);
+    transition: var(--transition);
+  }
+  
+  .header__nav-link:hover,
+  .header__nav-link.active-link {
+    color: var(--white);
+    background-color: var(--green);
+  }
+  
+  .header__icons {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .header__icons span {
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: 1.7rem;
+    text-align: center;
+    line-height: 4.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    color: var(--black);
+    background: var(--grey);
+    transition: var(--transition);
+  }
+  
+  .header__icons span.menu {
+    display: none;
+  }
+  
+  .header__icons span:hover {
+    color: var(--white);
+    background: var(--green);
+    transform: rotate(360deg);
+  }
+  
+  @media screen and (max-width: 768px) {
+    .header__nav {
+      padding: 1rem;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+      border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+  
+    .header__nav.show-menu {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+  
+    .header__nav-link {
+      display: block;
+      padding: 1.5rem;
+      margin: 1rem;
+      font-size: 2rem;
+      background: var(--grey);
+    }
+  
+    .header__icons span.menu {
+      display: inline-block;
+    }
+  }
+  
+  @media screen and (max-width: 991px) {
+    .header {
+      padding: 1rem 2rem;
+    }
+  }
+  

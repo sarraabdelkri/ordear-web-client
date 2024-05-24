@@ -1,0 +1,40 @@
+.footer {
+
+    background: #f7a4a4;
+    padding: auto ;
+    padding-bottom: 20px;
+    height : auto ;
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+.footerr{
+    background: #a29393;
+    padding: auto ;
+    padding-bottom: 20px;
+    height : auto ;
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+}
+.text{
+    color:#FA8072;
+}   
+.copyright {
+    font-size: 0.875rem;
+    color: black !important;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 60px;
+
+}
+
+
+
+@media (max-width: 740px) {
+    .footer {
+        padding: 0 10px;    
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,42 @@
+.special-dish {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding-top: 9rem;
+}
+
+.special-dish__content {
+    flex: 1 1 45rem;
+}
+
+.special-dish__title {
+    color: var(--black);
+    font-size: 7rem;
+}
+
+.special-dish__subtitle {
+    color: var(--green);
+    font-size: 2.5rem;
+}
+
+.special-dish__description {
+    color: var(--light-color);
+    font-size: 2.2rem;
+    padding: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.special-dish__image {
+    flex: 1 1 45rem;
+}
+
+.special-dish__image img {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .special-dish__title {
+        font-size: 5rem;
+    }
+}

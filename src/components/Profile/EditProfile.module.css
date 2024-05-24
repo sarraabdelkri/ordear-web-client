@@ -1,0 +1,206 @@
+.backdrop {
+    position: fixed;
+    top : 0 ;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.638) ;
+    z-index: 20;
+}
+
+.modal  {
+
+    background-color: white;
+   min-width: 300px;
+   width: 60%;
+   border-radius: 15px;
+   padding: 15px;
+   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.input {
+    max-width: 100%;
+    width: 100%;
+    color: #595757;
+    background-color: #F0F0F0;
+    margin: 10px 0;
+    height: 55px;
+    border-radius: 55px;
+    padding: 15px;
+    border: none;
+    outline: none;
+}
+
+.input::placeholder {
+  max-width: 100%;
+  width: 100%;
+  color: #595757;
+  background-color: #F0F0F0;
+  margin: 10px 0;
+  height: 55px;
+  border-radius: 55px;
+  padding: 15px;
+  border: none;
+  outline: none;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.button-3 {
+  appearance: none;
+  background-color: #FA8072;
+  height : 60px;
+  border: 1px solid #FA8072;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 100%;
+  margin: 10px 0;
+}
+.button-4 {
+  appearance: none;
+  background-color: #FA8072;
+  height : 60px;
+  border: 1px solid #FA8072;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 50%;
+  margin: 10px 0; /* Ajoute une marge en haut et en bas */
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column; /* Les boutons seront disposés verticalement */
+}
+
+.button-3:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.button-3:hover {
+  background-color: #f3a9a9;
+  color: black;
+  transition: 1s;
+}
+
+.button-3:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+.button-3:disabled {
+  background-color: #94d3a2;
+  border-color: rgba(27, 31, 35, .1);
+  color: rgba(255, 255, 255, .8);
+  cursor: default;
+}
+
+.button-3:active {
+  background-color: #298e46;
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.top img {
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+}
+.avatarContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap : 10px ;
+}
+.avatar {
+  max-width: 100%;
+  width: 150px;
+  height: 150px;
+  border: 1px solid #b9c1cb;
+  border-radius: 50%;
+  padding: 5px;
+}
+.uploadButton {
+  border-width: 1px;
+  border-radius: 4px;
+}
+.bg-light {
+  background-color: #f8f9fa;
+}
+.phone-input-container .react-tel-input .flag-dropdown {
+  z-index: 9999;
+}
+.centered-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.centered-buttons button {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #FA8072;
+  border: none;
+  border-radius: 5px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="password"] + progress {
+  width: 100%;
+  height: 8px;
+  margin-top: 5px;
+}
+
+
+span.password-strength {
+  display: block;
+  font-size: 12px;
+  margin-top: 5px;
+  color: #777; /* Couleur du texte */
+}

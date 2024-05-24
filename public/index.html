@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <title>Menu</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="%PUBLIC_URL%/logo1.png" />
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;1,100;1,300;1,400;1,500;1,600;1,700;1,800&family=Tajawal:wght@200&display=swap" rel="stylesheet">
+
+  <!-- Spinner CSS -->
+  <style>
+    .spinner-container {
+      display: none; /* Masquer le spinner par défaut */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-left-color: #FA8072;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Spinner -->
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Your content -->
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Autres scripts -->
+  
+  <!-- Custom Script to Show/Hide Spinner -->
+  <script>
+    // Attendez que le contenu soit chargé
+    window.addEventListener('DOMContentLoaded', function() {
+      // Sélectionnez le conteneur du spinner
+      var spinnerContainer = document.querySelector('.spinner-container');
+      // Affichez le spinner en supprimant la classe de masquage
+      spinnerContainer.style.display = 'block';
+    });
+
+    // Attendez que tous les éléments de la page, y compris les images, soient chargés
+    window.addEventListener('load', function() {
+      // Sélectionnez le conteneur du spinner
+      var spinnerContainer = document.querySelector('.spinner-container');
+      // Masquez le spinner en supprimant la classe de masquage
+      spinnerContainer.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

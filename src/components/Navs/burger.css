@@ -1,0 +1,134 @@
+
+
+
+/* Гамбургер иконка */
+.menu-btn {
+	width: 30px;
+	height: 30px;
+	position: relative;
+	z-index:2;
+	overflow: hidden;
+}
+
+.menu-btn .bar {
+	width: 30px;
+	height: 4px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+    border-radius: 4px;
+	transform: translate(-50%, -50%);
+	background-color: #FA8072;
+	transition: all 0.3s ease-in-out;
+}
+
+.menu-btn .bar:nth-of-type(2) {
+	top: calc(50% - 9px);
+}
+.menu-btn .bar:nth-of-type(3) {
+	top: calc(50% + 9px);
+}
+
+/* Меняем гамбургер иконку, когда меню открыто */
+.menu-btn.active .bar:nth-of-type(1) {
+  display: none;
+}
+.menu-btn.active .bar:nth-of-type(2) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(45deg);  
+}
+.menu-btn.active .bar:nth-of-type(3) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(-45deg); 
+}
+
+/* Меню, которое будет появляться */
+.nav_ {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 20%;
+	height: 100vh;
+	padding: 15px;
+    background: #ea9999;
+	opacity: 0.7;   
+	transform: translateX(-100%);
+	transition: transform 0.5s; 
+}
+
+.nav_.active {
+	transform: translateX(0);
+}
+
+.nav_ .nav__list_item {
+	list-style-type: none;
+}
+
+.button-30 {
+	align-items: center;
+	appearance: none;
+	background-color: #FA8072;
+	border-radius: 4px;
+	border-width: 0;
+	box-sizing: border-box;
+	color: #fff;
+	cursor: pointer;
+	display: inline-flex;
+	font-family: "JetBrains Mono",monospace;
+	height: 35px;
+	justify-content: center;
+	line-height: 1;
+	list-style: none;
+	overflow: hidden;
+	padding-left: 10px;
+	padding-right: 10px;
+	position: relative;
+	text-align: left;
+	text-decoration: none;
+	transition: box-shadow .15s,transform .15s;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	white-space: nowrap;
+	will-change: box-shadow,transform;
+	font-size: 15px;
+  }
+  .button-40 {
+	align-items: center;
+	appearance: none;
+	background-color: #fff;
+	border-radius: 4px;
+	border-width: 0;
+	box-sizing: border-box;
+	color: #fff;
+	cursor: pointer;
+	display: inline-flex;
+	font-family: "JetBrains Mono",monospace;
+	height: 48px;
+	justify-content: center;
+	line-height: 1;
+	list-style: none;
+	overflow: hidden;
+	padding-left: 16px;
+	padding-right: 16px;
+	position: relative;
+	text-align: left;
+	text-decoration: none;
+	transition: box-shadow .15s,transform .15s;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	white-space: nowrap;
+	will-change: box-shadow,transform;
+	font-size: 18px;
+  }
+  .link-salmon {
+    color: #FA8072; 
+  }
+ 
+  
+  .flag-icon {
+	width: 10px; /* Définir la largeur des icônes de drapeau */
+	height: auto; /* Garder le rapport hauteur-largeur pour éviter l'étirement */
+  }
+  

@@ -1,0 +1,61 @@
+/* Map.module.css */
+
+/* Styles pour la section du conteneur de la carte */
+.mapContainer {
+    padding: 3rem 0;
+    width: "1000px";
+  }
+  
+  /* Styles pour la carte */
+  .mapCard {
+    border: none;
+    box-shadow: none;
+  }
+  
+  /* Styles pour le conteneur interne de la carte */
+  .mapContainerInner {
+    overflow: hidden;
+    padding-bottom: 56.25%; /* Ratio 16:9 pour maintenir l'aspect */
+    position: relative;
+    height: 0;
+  }
+  
+  /* Styles pour la carte fermée */
+  .closed {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: 20%;
+    overflow: hidden;
+    background-color: transparent;
+    transition: all 1s;
+    border-radius: 0 !important;
+  }
+  
+  .closed.top {
+    top: 0;
+    height: 100%;
+  }
+  
+  /* Styles pour le bouton */
+  .button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  /* Styles pour la couleur "Living Coral" */
+  .livingCoral {
+    background-color: #fa7268;
+  }
+  
+  /* Styles pour le texte avec la couleur "Living Coral" */
+  .livingCoralText {
+    color: #fa7268;
+  }
+  
+  /* Styles pour le padding top 3.5 */
+  .pt35 {
+    padding-top: 3.5rem;
+  }
+  

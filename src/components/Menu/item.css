@@ -1,0 +1,492 @@
+.img_ {
+  max-width: 100%;
+}
+
+.card_item {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 350px;
+}
+
+.card-header_item {
+  height: 200px;
+}
+
+.card-header_item .img_ {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.card-content_item {
+  background-color: #fff;
+  padding: 30px;
+}
+
+.card-title_item {
+  height: 20px;
+  margin: 0;
+}
+
+.card-excerpt_item {
+  color: #777;
+  margin: 10px 0 20px;
+}
+
+.author_item {
+  display: flex;
+}
+
+.profile-img_item {
+  border-radius: 50%;
+  overflow: hidden;
+  height: 40px;
+  width: 40px;
+}
+
+.author-info_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 10px;
+  width: 100px;
+}
+
+.author-info_item .small_item {
+  color: #aaa;
+  margin-top: 5px;
+}
+
+.animated-bg_item {
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 10%,
+    #f6f7f8 20%,
+    #f6f7f8 100%
+  );
+  background-size: 200% 100%;
+  animation: bgPos 1s linear infinite;
+}
+
+.animated-bg-text_item {
+  border-radius: 50px;
+  display: inline-block;
+  margin: 0;
+  height: 10px;
+  width: 100%;
+}
+
+@keyframes bgPos {
+  0% {
+    background-position: 50% 0;
+  }
+
+  100% {
+    background-position: -150% 0;
+  }
+}
+.button-1 {
+  background-color: var(--primary-blue);
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  outline: none;
+  padding: 10px 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: middle;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  align-items: center; /* Ajout de cette ligne pour centrer horizontalement */
+}
+
+
+.button-1:hover,
+.button-1:focus {
+  background-color: var(--secondary-blue);
+}
+@media (max-width: 900px) {
+  .block2 {
+    display: none;
+  }
+}
+.center {
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .block2 {
+    margin-top: -20%;
+  }
+  .center {
+    text-align: left;
+  }
+}
+
+.top {
+  margin-top: -5%;
+}
+@media (max-width: 900px) and (min-width: 500px) {
+  .topper {
+    margin-top: -10%;
+  }
+}
+@media (max-width: 500px) {
+  .topper {
+    margin-top: -20%;
+  }
+}
+.scannerStyle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  padding: 50px;
+
+}
+@media (max-width: 768px) {
+  .scannerStyle {
+    padding: 20px; /* Réduire le rembourrage pour les écrans plus petits */
+  }
+}
+.full-page-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+.image {
+  width: 100%;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 30px;
+  position: relative;
+}
+.text-center1 {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center; /* If needed for text alignment within the box */
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 10px;
+  color: white;
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
+    -1px -1px 0 #000;
+}
+@media (min-width: 600px) {
+  /* Styles to apply when screen width is 600px or larger */
+  .price {
+    justify-content: flex-end;
+    display: flex;
+  }
+}
+
+.price {
+  font-weight: bold;
+}
+/* Ajoutez le CSS ci-dessous à votre fichier CSS existant */
+
+/* Ajoutez ces styles pour le menu */
+.menu #menu-flters {
+  padding: 0;
+  margin: 0 auto 0 auto;
+  list-style: none;
+  text-align: center;
+  border-radius: 50px;
+}
+
+.menu #menu-flters li {
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px 12px 10px 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 10px;
+  transition: all ease-in-out 0.3s;
+  border-radius: 50px;
+  font-family: "Playfair Display", serif;
+}
+
+.menu #menu-flters li:hover,
+.menu #menu-flters li.filter-active {
+  color: #000000;
+}
+.black-text {
+  color: black;
+}
+
+
+.menu #menu-flters li:last-child {
+  margin-right: 0;
+}
+
+.menu .menu-item {
+  margin-top: 50px;
+}
+
+.menu .menu-img {
+  width: 70px;
+  border-radius: 50%;
+  float: left;
+  border: 5px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu .menu-content {
+  margin-left: 85px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.menu .menu-content::after {
+  content: "......................................................................" "...................................................................." "....................................................................";
+  position: absolute;
+  left: 20px;
+  right: 0;
+  top: -4px;
+  z-index: 1;
+  color: #bab3a6;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.menu .menu-content a {
+  padding-right: 10px;
+  background: #1a1814;
+  position: relative;
+  z-index: 3;
+  font-weight: 700;
+  color: white;
+  transition: 0.3s;
+}
+
+.menu .menu-content a:hover {
+  color: #cda45e;
+}
+
+.menu .menu-content span {
+  background: #1a1814;
+  position: relative;
+  z-index: 3;
+  padding: 0 10px;
+  font-weight: 600;
+  color: #cda45e;
+}
+
+.menu .menu-ingredients {
+  margin-left: 85px;
+  font-style: italic;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  color: rgba(255, 255, 255, 0.5);
+}
+.menu .section-bg {
+  background-color: #1a1814;
+}
+/* MenuRest.css */
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-image: url("https://media.admagazine.fr/photos/6350150bfd9c4fcf5651b0c3/16:9/w_2560%2Cc_limit/TOO%2520Restaurant%25203.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Opacité du fond */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+}
+
+.overlay > * {
+  margin-bottom: 1em;
+}
+
+.overlay > .container {
+  width: 100%;
+  max-width: 800px;
+}
+.black-background {
+  background-color: black;
+  color: white; /* Changer la couleur du texte pour s'adapter à l'arrière-plan noir */
+}
+.menu #menu-flters {
+  padding: 0;
+  margin: 0 auto 0 auto;
+  list-style: none;
+  text-align: center;
+  border-radius: 50px;
+}
+
+.menu #menu-flters li {
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px 12px 10px 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 10px;
+  transition: all ease-in-out 0.3s;
+  border-radius: 50px;
+  font-family: "Playfair Display", serif;
+}
+
+.menu #menu-flters li:hover,
+.menu #menu-flters li.filter-active {
+  color: #cda45e;
+}
+
+.menu #menu-flters li:last-child {
+  margin-right: 0;
+}
+
+.menu .menu-item {
+  margin-top: 50px;
+}
+
+.menu .menu-img {
+  width: 70px;
+  border-radius: 50%;
+  float: left;
+  border: 5px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu .menu-content {
+  margin-left: 85px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.menu .menu-content::after {
+  content: "......................................................................" "...................................................................." "....................................................................";
+  position: absolute;
+  left: 20px;
+  right: 0;
+  top: -4px;
+  z-index: 1;
+  color: #bab3a6;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.menu .menu-content a {
+  padding-right: 10px;
+  background: #1a1814;
+  position: relative;
+  z-index: 3;
+  font-weight: 700;
+  color: white;
+  transition: 0.3s;
+}
+
+.menu .menu-content a:hover {
+  color: #cda45e;
+}
+
+.menu .menu-content span {
+  background: #1a1814;
+  position: relative;
+  z-index: 3;
+  padding: 0 10px;
+  font-weight: 600;
+  color: #cda45e;
+}
+
+.menu .menu-ingredients {
+  margin-left: 85px;
+  font-style: italic;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  color: rgba(255, 255, 255, 0.5);
+}
+.tasty-menu {
+  font-family: 'Amsterdam Four', sans-serif; /* Utilisation de la police Amsterdam Four */
+  font-size: 28px; /* Taille de police */
+  color: #ff6347; /* Couleur saumon */
+  text-transform: uppercase; /* Conversion en majuscules */
+  letter-spacing: 1px; /* Espacement des lettres */
+  margin-top: 10px; /* Marge supérieure */
+}
+/* ScannerWithCamera.css */
+
+.scanner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .scanner-container {
+    width: 90%; 
+    padding: 10px; 
+  }
+ 
+  .scanner-container {
+    width: 90%; 
+    padding: 10px; 
+  }
+}
+

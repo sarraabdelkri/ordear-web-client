@@ -1,0 +1,65 @@
+.horizontal-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 20px; /* Espacement entre les cartes */
+    padding: 20px 0; /* Padding vertical pour le conteneur */
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    display: none; /* Masquer la scrollbar sur WebKit browsers */
+}
+
+.horizontal-scroll .card {
+    flex: 0 0 auto; /* Les éléments ne grandissent pas, mais peuvent rétrécir */
+    width: 300px; /* Largeur fixe pour chaque carte */
+}
+
+/* Optional: Style for smooth scrolling */
+.horizontal-scroll {
+    scroll-behavior: smooth;
+}
+.similar-product-card {
+    width: 300px; /* Largeur de la carte */
+    height: 300px; /* Hauteur de la carte pour un format carré */
+    overflow: hidden; /* Cache tout débordement */
+    position: relative; /* Pour positionner les éléments à l'intérieur */
+    margin: 10px; /* Espacement entre les cartes */
+}
+
+.similar-product-card img {
+    width: 100%; /* Pleine largeur de la carte */
+    height: auto; /* Hauteur automatique pour maintenir le rapport d'aspect */
+    position: absolute; /* Position absolue pour centrer l'image */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.similar-products-container {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap; /* Empêche les cartes de se mettre à la ligne suivante */
+}
+
+/* Ajouter une animation pour un défilement automatique */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.similar-products-container:hover {
+    animation: scroll 10s linear infinite; /* Ajuster la durée selon les préférences */
+}
+.similar-product-image {
+    width: 150px;  /* ou toute autre taille appropriée */
+    height: 150px; /* Assurez-vous que la largeur et la hauteur sont égales pour un cercle parfait */
+    object-fit: cover; /* Garantit que l'image couvre la zone sans être déformée */
+    border-radius: 50%; /* Rend l'image circulaire */
+    margin: auto; /* Centre l'image dans son conteneur */
+}
+

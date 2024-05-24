@@ -1,0 +1,24 @@
+.dishes {
+    /* Définissez les propriétés CSS qui seront animées */
+    padding: 2.5rem;
+    background: var(--white);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  
+    /* Ajoutez la transition pour ces propriétés */
+    transition: padding var(--transition), background var(--transition), border-radius var(--transition), border var(--transition), box-shadow var(--transition);
+  }
+  
+  .dishes__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 1.5rem;
+  
+    /* Ajoutez la transition pour les propriétés de la grille qui changeront */
+    transition: grid-template-columns var(--transition), gap var(--transition);
+  }
+  

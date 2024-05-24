@@ -1,0 +1,369 @@
+.reader {
+  width: 100%;
+  margin: auto;
+  border: none;
+  background-color: #f0eeee;
+}
+
+.menuSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 77vh;
+  position: relative;
+  width: 100%;
+}
+
+.price {
+  color: grey;
+  font-weight: 1000;
+}
+
+.cartBtn {
+  background-color: whitesmoke;
+  color: black;
+  width: 150px;
+  height: 40px;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  gap: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  cursor: pointer;
+}
+
+.cartBtn > * {
+  margin-bottom: 0;
+}
+
+.carticon {
+  width: 30px;
+  height: 30px;
+}
+
+.carousel {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  z-index: 10;
+}
+
+.carouselImg {
+  width: 500px;
+  height: 400px;
+  filter: brightness(0.6);
+  object-fit: cover;
+}
+
+.carouselButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.arrowTop {
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.title {
+  margin-top: 30px;
+  text-align: center;
+}
+
+@media (max-width: 750px) {
+  .reader {
+    width: 100%;
+  }
+  .carouselImg {
+    width: 90vw;
+  }
+
+  .cartBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.button-70 {
+  background-color: var(--primary-blue);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 5px 15px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: Montserrat, sans-serif;
+  font-size: 0.9em;
+  margin: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-56 {
+  align-items: center;
+  background-color: #ff6347;
+  border: 2px solid transparent;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  width: auto;
+  max-width: 100%;
+  padding: 0 5px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-56:hover {
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #ff6347;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  width: auto;
+  max-width: 100%;
+  padding: 0 5px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: 1s;
+}
+
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform 0.2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
+}
+
+.button-2 {
+  background-color: gainsboro;
+  border-radius: 8px;
+  border-width: 0;
+  color: #333333;
+  cursor: pointer;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.button-2:hover {
+  background-color: burlywood;
+}
+
+.h2 {
+  margin-top: 30px;
+}
+
+.singleOrder {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 15px;
+}
+
+.restauImg {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.status {
+  font-weight: 600;
+  color: var(--accent-blue);
+}
+
+.bottomOrder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.338) !important ;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.cancelBackdrop {
+  background-color: rgba(0, 0, 0, 0.145);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 150;
+}
+
+.cancelModal {
+  background-color: white;
+  min-width: 300px;
+  min-height: 200px;
+  width: 35%;
+  max-width: 90%;
+
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  max-height: 70%;
+  overflow: auto;
+  z-index: 100;
+}
+
+.input {
+  max-width: 380px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  height: 55px;
+  border-radius: 55px;
+  padding: 15px;
+  border: none;
+  outline: none;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.top img {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+}
+
+.orders {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding-bottom: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow: auto;
+}
+
+@media (max-width: 1000px) and (min-width: 751px) {
+  .orders {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 750px) {
+  .orders {
+    justify-content: flex-start;
+  }
+}
+.grid-item {
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .grid-item {
+    display: none;
+  }
+}
+
+/* Style pour l'image en plein écran */
+.image-container {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Style pour les cartes de produits */
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style pour les boutons */
+.button {
+  margin-top: auto;
+}
+
