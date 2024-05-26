@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 
 const Allergy = (props) => {
   const restaurantData = useSelector((state) => state.restaurant);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const creditRef = useRef(null);
   const cashRef = useRef(null);
@@ -31,6 +32,22 @@ const Allergy = (props) => {
 
   const handleSubmit = async () => {
     try {
+      if (!isAuthenticated) {
+        toast.error("You must be logged in to place an order.", {
+          style: {
+            border: "1px solid #81007F",
+            padding: "16px",
+            color: "#81007F",
+          },
+          iconTheme: {
+            primary: "#81007F",
+            secondary: "#D6C7D4",
+          },
+        });
+        navigate("/login");
+        return;
+      }
+
       if (paymentMethod === "") {
         toast.error("Pick a payment method", {
           style: {
@@ -87,6 +104,48 @@ const Allergy = (props) => {
         setTimeout(() => {
           navigate("/");
         }, 1000);
+      }
+    } catch (err) {
+      toast.error(err.message, {
+        style: {
+          border: "1px solid #81007F",
+          padding: "16px",
+          color: "#81007F",
+        },
+        iconTheme: {
+          primary: "#81007F",
+          secondary: "#D6C7D4",
+        },
+      });
+    }
+  };
+
+  const cashPayment = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/order/cash/method/payment`,
+        {
+          method: "PUT",
+          credentials: "include",
+        }
+      );
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.message || responseData.error);
+      } else {
+        toast.success("Payment confirmed and email sent", {
+          style: {
+            border: "1px solid #81007F",
+            padding: "16px",
+            color: "#81007F",
+          },
+          iconTheme: {
+            primary: "#81007F",
+            secondary: "#D6C7D4",
+          },
+        });
       }
     } catch (err) {
       toast.error(err.message, {
@@ -170,6 +229,7 @@ const Allergy = (props) => {
                 onClick={() => {
                   creditRef.current.checked = false;
                   setPaymentMethod("Cash");
+                  cashPayment(); // Appel de la fonction cashPayment
                 }}
               />
               <label htmlFor="cash" className={styles["check-box"]}></label>

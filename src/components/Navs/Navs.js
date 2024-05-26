@@ -33,6 +33,8 @@ import InfoIcon from "@mui/icons-material/Info";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import { cartActions } from '../../store/cartSlice';
+import { BsCart2 } from "react-icons/bs";
 
 const Navs = () => {
   initMDB({ Dropdown, Collapse });
@@ -42,10 +44,10 @@ const Navs = () => {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userEmail);
   const token = localStorage.getItem('token');
-
+  const cartItems = useSelector(state => state.cart.cartData || []);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [restaurants, setRestaurants] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
- 
   const [mobileView, setMobileView] = useState(false);
   const matches = useMediaQuery("(max-width: 800px)");
   const [fix, setFix] = useState(false);
@@ -57,6 +59,7 @@ const Navs = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [logoUrl, setLogoUrl] = useState(null);
+
   const toggleMobileView = () => {
     setMobileView(!mobileView);
   };
@@ -64,13 +67,13 @@ const Navs = () => {
   const toggleSettings = () => {
     setShowSettings(!showSettings);
   };
+
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       setRedirect(true);
       fetchRestaurants();
     }
   };
-
 
   const fetchRestaurants = async () => {
     try {
@@ -96,7 +99,6 @@ const Navs = () => {
   useEffect(() => {
     fetchRestaurants();
   }, [redirect, searchTerm]);
-
 
   useEffect(() => {
     const setFixed = () => {
@@ -133,7 +135,7 @@ const Navs = () => {
         console.log("UserData:", userData); // Ajout d'un log pour voir les données de l'utilisateur
         if (response.ok && userData.length > 0) {
           setUserFullName(`${userData[0].firstName} ${userData[0].lastName}`);
-          setUserImage(userData[0].image);
+          fetchUserImage();
         } else {
           throw new Error("Invalid user data");
         }
@@ -147,6 +149,26 @@ const Navs = () => {
     }
   }, [isAuth, isGoogleAuth, token]);
 
+  const fetchUserImage = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/getImage`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch user image");
+      }
+      const imageBlob = await response.blob();
+      const imageObjectURL = URL.createObjectURL(imageBlob);
+      setUserImage(imageObjectURL);
+    } catch (error) {
+      console.error('Error fetching user image:', error);
+    }
+  };
 
   const logout = async () => {
     try {
@@ -197,10 +219,12 @@ const Navs = () => {
   const navigateToProfile = () => {
     navigate("/home");
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchRestaurants();
   };
+
   useEffect(() => {
     // Initialiser le dropdown après le rendu du composant
     const dropdownElement = document.getElementById('navbarDropdownMenuAvatar');
@@ -210,6 +234,7 @@ const Navs = () => {
       });
     }
   }, []);
+
   useEffect(() => {
     // Fetch the logo image when the component mounts
     async function fetchLogo() {
@@ -229,6 +254,29 @@ const Navs = () => {
     fetchLogo();
   }, []); 
 
+  const fetchCart = async() => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/cart/get/cartTrashweb/by/user`,{
+        credentials : "include"
+      });
+      const responseData = await response.json();
+      if (!response.ok) {
+        throw new Error("cart doesn't exist");
+      } else {
+        dispatch(cartActions.setCart(responseData));
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const total = useSelector(state => state.cart.total);
+  const handleCartClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCartClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <>
@@ -288,28 +336,31 @@ const Navs = () => {
             <div className="ms-auto d-flex align-items-center">
               {isAuth || isGoogleAuth ? (
                 <div className="d-flex align-items-center">
-                  <a className="link-salmon me-3" href="#"  >
-                  <AiOutlineShoppingCart style={{ fontSize: "25px" ,width: "25px" }} />
-
+                  <a className="link-salmon me-3" href="/cart"  >
+                  <AiOutlineShoppingCart  onClick={handleCartClick} style={{ fontSize: "25px" ,width: "25px" }} />
+                  <span>{total}</span>
                   </a>
                   <div className="dropdown">
-                    <a
-                      data-mdb-dropdown-init
-                      className="dropdown-toggle d-flex align-items-center hidden-arrow me-3 link-salmon"
-                      href="#"
-                      id="navbarDropdownMenuAvatar"
-                      role="button"
-                      aria-expanded="false"
-                    >                
-                     <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                  <a
+                    data-mdb-dropdown-init
+                    className="dropdown-toggle d-flex align-items-center hidden-arrow me-3 link-salmon"
+                    href="/home"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    aria-expanded="false"
+                  >                
+                    {userImage ? (
+                      <img
+                        src={userImage}
                         className="rounded-circle"
-                        style={{ height: "40px" }}
-                        alt="Black and White Portrait of a Man"
+                        style={{ height: "50px" }}
+                        alt="User"
                         loading="lazy"
                       />
-
-                    </a>
+                    ) : (
+                      <AiOutlineUser className="rounded-circle" style={{ height: "40px" }} />
+                    )}
+                  </a>
                     <ul
                       className="dropdown-menu dropdown-menu-end"
                       style={{

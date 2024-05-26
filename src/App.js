@@ -30,6 +30,7 @@ import Carts from "./components/Menu/search/Carts";
 import DishDetails from "./components/Menu/search/DishDetails";
 import Allergy from "./components/Menu/Allergy";
 import OrderDetials from "./components/Home/orderDetails";
+import WishlistPage from "./components/Menu/search/WishlistPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
       { path: "/whychooseus", element: <WhyChooseUs /> },
       {path: "/cart", element: <Carts />},
       {path:"/Allergy", element: <Allergy/>},
+      {path:"/wishlist", element: <WishlistPage/>},
     ],
   },
 ]);

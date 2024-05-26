@@ -12,6 +12,7 @@ import { AiOutlineUser, AiOutlineLock ,AiOutlineCamera  } from "react-icons/ai";
 import backgroundImage from '../../assets/full-bg.png';
 import Moment from "react-moment";
 import { MdLock, MdPhone, MdEmail, MdCake, MdLocationOn, MdPerson , MdEdit, MdLink, MdNotifications  ,MdExitToApp } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const [profile, setProfile] = useState({});
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
@@ -19,6 +20,8 @@ const Profile = () => {
   const [showSecondModal, setShowSecondModal] = useState(false);
   const [imageURL, setImageURL] = useState(null);
   const isGoogleAuth = useSelector((state) => state.auth.isGoogleAuthenticated);
+  const navigate = useNavigate();
+  
  
 
   const fetchProfile = async () => {
@@ -131,14 +134,16 @@ const Profile = () => {
 
   const getImage = async () => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/getImage`,
-        {
-          credentials: "include",
-        }
-      );
-
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/getImage`, {
+        credentials: "include",
+      });
+  
       if (!response.ok) {
+        if (response.status === 401) {
+          // If unauthorized, redirect to login
+          navigate('/login');
+          return;
+        }
         const responseData = await response.json();
         throw new Error(responseData.message || responseData.error);
       } else {
@@ -150,6 +155,7 @@ const Profile = () => {
       console.log(err.message);
     }
   };
+  
 
   useEffect(() => {
     if (isAuth) getImage();
@@ -216,7 +222,7 @@ const Profile = () => {
                   </div>
                 </label>
                 <div style={{ marginLeft: "10px" ,fontWeight: "bolder"}}>{profile.firstName} {profile.lastName}</div>
-                <div style={{ marginTop: "80px", fontWeight: "lighter" ,marginLeft:"-135px" }}>
+                <div style={{ marginTop: "80px", fontWeight: "lighter" ,marginLeft:"-80px" }}>
                       {profile.address}
                     </div>
                 <div className={styles.cameraIconContainer}>

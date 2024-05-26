@@ -1,0 +1,13 @@
+/* WishlistPage.css */
+
+.wishlist-list {
+    display: flex;
+    flex-direction: row;
+    gap: 20px; /* Espace entre les éléments */
+  }
+  
+  .wishlist-item {
+    display: flex;
+    justify-content: center;
+  }
+  

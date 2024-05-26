@@ -1,16 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const wishlistSlice = createSlice({
-    name: 'wishlist',
-    initialState: {
-        count: 0
+const initialState = {
+    items: [],
+    count: 0
+  };
+  const wishlistSlice = createSlice({
+  name: 'wishlist',
+  initialState,
+  reducers: {
+    addToWishlist(state, action) {
+      state.items.push(action.payload);
+      state.count += 1;
     },
-    reducers: {
-        incrementWishlistCount: state => {
-            state.count += 1;
-        }
+    setWishlist(state, action) {
+      state.items = action.payload;
+      state.count = action.payload.length;
     }
+  }
 });
 
-export const { incrementWishlistCount } = wishlistSlice.actions;
+export const wishlistActions = wishlistSlice.actions;
 export default wishlistSlice;

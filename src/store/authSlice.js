@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { jwtDecode } from 'jwt-decode';
 
-const initialState = { 
+
+const initialState = {
     isAuthenticated: localStorage.getItem('tokenLogin') ? true : false,
-    isGoogleAuthenticated: false, // Remettre à false lors de la déconnexion
-    userEmail: ''
-}
+    isGoogleAuthenticated: false,
+    userEmail: '',
+    userId: localStorage.getItem('tokenLogin') ? jwtDecode(localStorage.getItem('tokenLogin')).id : null // Assurez-vous que 'id' est le bon nom de la clé dans votre JWT
+};
 
 const authSlice = createSlice({
     name: 'auth',
@@ -12,19 +15,21 @@ const authSlice = createSlice({
     reducers: {
         login(state, action) {
             state.isAuthenticated = true;
-            state.userEmail = action.payload;
+            state.userEmail = action.payload.email;
+            state.userId = action.payload.id;
+            localStorage.setItem('tokenLogin', action.payload.token);
         },
         logout(state) {
             state.isAuthenticated = false;
             state.userEmail = '';
             state.isGoogleAuthenticated = false;
+            state.userId = null;
             localStorage.removeItem('tokenLogin');
         },
         googleLogin(state) {
             state.isAuthenticated = true;
             state.isGoogleAuthenticated = true;
         },
-        // Ajout de la fonction loginGoogle
         loginGoogle(state) {
             state.isGoogleAuthenticated = true;
         }

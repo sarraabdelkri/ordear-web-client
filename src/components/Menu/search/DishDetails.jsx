@@ -8,7 +8,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify'; 
 import { useDispatch } from 'react-redux';
-import { incrementWishlistCount } from '../../../store/wishlistSlice';
+// import { incrementWishlistCount } from '../../../store/wishlistSlice';
 import { cartActions } from '../../../store/cartSlice';
 import { Link } from 'react-router-dom';
 import { faStar as regularHeart } from '@fortawesome/free-regular-svg-icons';
@@ -102,25 +102,25 @@ function DishDetails(props) {
         }
     }, []);
 
-    const handleWishlistClick = async () => {
-        if (!userId) {
-            console.error("User ID is undefined.");
-            toast.error("User not authenticated.");
-            return;
-        }
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/product/users/${userId}/wishlist/${productId}`);
-            if (response.status === 200) {
-                dispatch(incrementWishlistCount());
-                toast.success('Product added to wishlist!');
-            } else {
-                throw new Error('Failed to add product to wishlist');
-            }
-        } catch (error) {
-            console.error('Error adding to wishlist:', error);
-            toast.error('Failed to add to wishlist');
-        }
-    };
+    // const handleWishlistClick = async () => {
+    //     if (!userId) {
+    //         console.error("User ID is undefined.");
+    //         toast.error("User not authenticated.");
+    //         return;
+    //     }
+    //     try {
+    //         const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/product/users/${userId}/wishlist/${productId}`);
+    //         if (response.status === 200) {
+    //             dispatch(incrementWishlistCount());
+    //             toast.success('Product added to wishlist!');
+    //         } else {
+    //             throw new Error('Failed to add product to wishlist');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error adding to wishlist:', error);
+    //         toast.error('Failed to add to wishlist');
+    //     }
+    // };
 
     useEffect(() => {
         const fetchDishDetails = async () => {
@@ -328,7 +328,7 @@ function DishDetails(props) {
                             <div className="buttons d-flex align-items-center">
                             {/* Add a wrapper div around the FontAwesomeIcon for better control over styling */}
                             <div style={{ marginRight: '1rem' }}> {/* Adds right margin to the heart icon */}
-                                <FontAwesomeIcon icon={faHeart}  style={{ color: "salmon" ,fontSize: "24px" }} onClick={handleWishlistClick} />
+                                <FontAwesomeIcon icon={faHeart}  style={{ color: "salmon" ,fontSize: "24px" }} />
                             </div>
                             
                             <div className="block mr-3">
