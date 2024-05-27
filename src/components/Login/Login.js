@@ -11,7 +11,9 @@ import email from "../../assets/envelope-solid.svg";
 import pass from "../../assets/lock-solid.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { GoogleLogin } from 'react-google-login';
 
+const CLIENT_ID = '647309244753-0fd17483bm3kvipl4dcv91b2k3l234ln.apps.googleusercontent.com';
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
@@ -72,7 +74,24 @@ const Login = () => {
       });
     }
   };
+  const onSuccess = async (response) => {
+    console.log('Connexion réussie:', response.profileObj);
 
+    const res = await fetch('/user/googleLogin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ token: response.tokenId })
+    });
+
+    const data = await res.json();
+    console.log('Réponse du serveur:', data);
+  };
+
+  const onFailure = (response) => {
+    console.log('Échec de la connexion:', response);
+  };
   return (
     <Fragment>
       {isAuth ? (

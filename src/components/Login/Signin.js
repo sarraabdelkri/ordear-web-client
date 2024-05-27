@@ -18,6 +18,9 @@ import RegisterSection from "../Sign up/RegisterSection";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa6";
 import ReCAPTCHA from "react-google-recaptcha";
+import { GoogleLogin } from 'react-google-login';
+
+const CLIENT_ID = '647309244753-0fd17483bm3kvipl4dcv91b2k3l234ln.apps.googleusercontent.com';
 
 
 function Signin() {
@@ -115,8 +118,28 @@ function Signin() {
     return false;
   };
 
- 
+  const onSuccess = async (response) => {
+    console.log('Connexion réussie:', response.profileObj);
 
+    const res = await fetch('/user/googleLogin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ token: response.tokenId })
+    });
+
+    const data = await res.json();
+    console.log('Réponse du serveur:', data);
+  };
+
+  const onFailure = (response) => {
+    if (response.error === 'popup_closed_by_user') {
+      console.warn('La fenêtre pop-up a été fermée avant la fin de l\'authentification.');
+    } else {
+      console.error('Échec de la connexion:', response);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -255,12 +278,15 @@ function Signin() {
                       <AiOutlineUserSwitch /> Connexion en tant qu'invité
                     </small>
                   </a>
-                  {/* <GoogleLogin
-                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                    onSuccess={handleGoogleLoginSuccess}
-                    onFailure={handleGoogleLoginFailure}
-                    cookiePolicy={'single_host_origin'}
-                    render={renderProps =>  */}
+                            <GoogleLogin
+                  clientId={CLIENT_ID}
+                  buttonText="Se connecter avec Google"
+                  onSuccess={onSuccess}
+                  onFailure={onFailure}
+                  cookiePolicy={'single_host_origin'}
+                  uxMode="redirect" // Utiliser la redirection au lieu de pop-up
+                  redirectUri="http://localhost:3000" // Remplacez par votre URL de redirection
+                />
                       <div className="login-buttons">
                         <button  className="google-login-btn">
                           <FcGoogle />

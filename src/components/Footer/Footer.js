@@ -39,7 +39,7 @@ const SimpleFooter = ({ theme }) => {
   
   const fetchUsefulLinks = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/usefulLinks/`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/links/`);
       if (!response.ok) {
         throw new Error('Failed to fetch useful links');
       }
