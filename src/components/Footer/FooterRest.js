@@ -1,7 +1,7 @@
 import React , { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Footer.module.css";
-import OriginalLogo from "../../assets/logo44 (1).png";
+import OriginalLogo from "../../assets/logo11.png";
 import BlackLogo from "../../assets/logo55.png";
 import WhiteLogo from "../../assets/logo22.png";
 import PlayStore from '../../assets/googlePlay.png';
@@ -72,7 +72,7 @@ const SimpleFooterRes = ({ theme }) => {
     // Fetch the logo image when the component mounts
     async function fetchLogo() {
       try {
-        const response = await fetch("http://localhost:5555/logos/black");
+        const response = await fetch("https://backend.themenufy.com/logos/black");
         if (!response.ok) {
           throw new Error("Failed to fetch logo");
         }
@@ -94,7 +94,7 @@ const SimpleFooterRes = ({ theme }) => {
       <div className="row pt-5 col-12 justify-content-center align-items-center" style={{marginBottom:"-30px"}}>
         <img
           className={styles.logo}
-          src={logoUrl} 
+          src={OriginalLogo} 
           alt="Logo"
           style={{width: "200px"}}
         />

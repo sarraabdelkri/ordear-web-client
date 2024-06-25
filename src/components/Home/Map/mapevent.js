@@ -8,15 +8,11 @@ import backgroundImage from "../../../assets/body-bg.jpg";
 import LeafletRoutingMachine from "./LeafletRoutingMachine";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { NavLink } from 'react-router-dom'; 
 import { faMapMarkerAlt, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
-
 function Mapevent() {
   const position = [43.59529281556225, -79.6962195316418];
-  const [events, setEvents] = useState([]);
   const [contactInfo, setContactInfo] = useState([]);
 
   let DefaultIcon = L.icon({
@@ -44,61 +40,62 @@ function Mapevent() {
     <section className="py-3 py-md-5 py-xl-8" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', margin: 0, padding: '20px 0' }}>
       <div className="container text-center">
         <h1>Contact Us</h1>
-        <hr style={{ margin: '20px auto', width: '250px', border: '1px solid black' ,marginBottom:"60px"}} />
+        <hr style={{ margin: '20px auto', width: '250px', border: '1px solid black', marginBottom: "60px" }} />
       </div>
 
-         
-      
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-md-9">
-
+          <div className="col-md-9 mb-4">
             <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ height: '350px', width: '100%' }}>
-
-                    <TileLayer
+              <TileLayer
                 url='http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}'
                 maxZoom={20}
                 subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
               />
-                <LeafletGeocoder />
-                <LeafletRoutingMachine />
-              </MapContainer>
-            </div>
-      
-            <div className="col-md-3 mt-3">
-  <ul className="list-unstyled">
-    {contactInfo.map(contact => (
-      <li key={contact._id} className="mb-3">
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-          <FontAwesomeIcon icon={faMapMarkerAlt} className="fa-2x text-salmon" style={{ color: "#FA8072", marginRight: '10px' ,height: '25px', width: '10%'}} />
-          <div>
-            <strong>Location:</strong>
-            <p>{contact.adresse}</p>
+              <LeafletGeocoder />
+              <LeafletRoutingMachine />
+            </MapContainer>
+          </div>
+
+          <div className="col-md-3">
+            <ul className="list-unstyled">
+              {contactInfo.map(contact => (
+                <li key={contact._id} className="mb-4">
+                  <div className="contact-item" style={{marginTop:"-1%"}} >
+                    <FontAwesomeIcon icon={faMapMarkerAlt} className="fa-2x text-salmon" style={{ color: "#FA8072", marginRight: '20px' ,marginTop:"20%" }} />
+                    <div style={{marginTop:"20%" , marginRight: '20px'}}>
+                      <strong>Location:</strong>
+                      </div>
+                      <div style={{marginTop:"20%"}}>
+                      <p>{contact.adresse}</p>
+                    </div>
+                  </div>
+
+                  <div className="contact-item" style={{marginTop:"10%"}}>
+                    <FontAwesomeIcon icon={faPhone} className="fa-2x text-salmon" style={{ color: "#FA8072", marginRight: '10px', marginTop:"20%" }} />
+                    <div style={{marginTop:"20%" , marginRight: '20px'}}>
+                      <strong>Call:</strong>
+                      </div>
+                      <div style={{marginTop:"20%"}}>
+                      <p>{contact.phone}</p>
+                    </div>
+                  </div>
+
+                  <div className="contact-item" style={{marginTop:"10%"}}>
+                    <FontAwesomeIcon icon={faEnvelope} className="fa-2x text-salmon" style={{ color: "#FA8072", marginRight: '10px' ,marginTop:"20%" }} />
+                    <div style={{marginTop:"20%" , marginRight: '20px'}}>
+                      <strong>Email:</strong>
+                      </div>
+                      <div style={{marginTop:"20%"}}>
+                      <p>{contact.email}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-          <FontAwesomeIcon icon={faPhone} className="fa-2x text-salmon" style={{ color: "#FA8072", marginRight: '10px',height: '25px', width: '10%' }} />
-          <div>
-            <strong>Call:</strong>
-            <p>{contact.phone}</p>
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-          <FontAwesomeIcon icon={faEnvelope} className="fa-2x text-salmon" style={{ color: "#FA8072", marginRight: '10px',height: '25px', width: '10%' }} />
-          <div>
-            <strong>Email:</strong>
-            <p>{contact.email}</p>
-          </div>
-        </div>
-      </li>
-    ))}
-  </ul>
-</div>
-
-                </div>
-        </div>
+      </div>
     </section>
   );
 }

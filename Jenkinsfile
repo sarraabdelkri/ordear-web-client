@@ -7,10 +7,10 @@ def targetBranch
 pipeline{
     agent any
     environment {
-       DOCKERHUB_USERNAME = "samarcherni"
-       DEV_TAG = "${DOCKERHUB_USERNAME}/ordearwebclient:v1.0.0-dev"
-       STAGING_TAG = "${DOCKERHUB_USERNAME}/ordearwebclient:v1.0.0-staging"
-       PROD_TAG = "${DOCKERHUB_USERNAME}/ordearwebclient:v1.0.11-prod"
+       DOCKERHUB_USERNAME = "taharejeb97"
+       DEV_TAG = "${DOCKERHUB_USERNAME}/ordearwebclient:v2.2.9-dev"
+       STAGING_TAG = "${DOCKERHUB_USERNAME}/ordearwebclient:v1.0.2-staging"
+       PROD_TAG = "${DOCKERHUB_USERNAME}/ordearwebclient:v2.2.9-prod"
   }
      parameters {
        string(name: 'BRANCH_NAME', defaultValue: "${scm.branches[0].name}", description: 'Git branch name')
@@ -38,7 +38,7 @@ pipeline{
     }
         stage('Git Checkout'){
             steps{
-                git branch: 'main', credentialsId: 'a4035d41-d262-465f-ad06-0fc3e4fa4e01', url: 'https://github.com/ipactconsult/ordear-web-client.git'            }
+                git branch: 'develop', credentialsId: 'git', url: 'https://github.com/ipactconsult/ordear-web-client.git'            }
         }
         
         stage('Clean Build'){
@@ -51,23 +51,23 @@ pipeline{
             steps{
                 nodejs('nodeJSInstallationName'){
                     sh 'npm install --legacy-peer-deps'
-                    sh 'npm install webpack'
+                    sh 'npm install webpack --legacy-peer-deps '
                     
                 }
             }
         }
-	   // stage('Static Test with Sonar') {
-	   //   when {
-		  //   expression {
-			 //   (params.CHANGE_ID != null) && ((targetBranch == 'develop') || (targetBranch == 'main') || (targetBranch == 'staging'))
-		  // }
-	   //   }
-		  //  steps{
-		  //   nodejs('nodeJSInstallationName'){
-			 //    sh 'node sonar-project.js'
-		  //   }
-		  //  }
-	   // }
+	  // stage('Static Test with Sonar') {
+	   //  when {
+		//    expression {
+		//	   (params.CHANGE_ID != null) && ((targetBranch == 'develop') || (targetBranch == 'main') || (targetBranch == 'staging'))
+		//  }
+	   //  }
+		//   steps{
+		//    nodejs('nodeJSInstallationName'){
+		//	    sh 'node sonar-project.js'
+		//    }
+		//   }
+	//   }
 
  
       stage('Build Docker') {
@@ -80,7 +80,7 @@ pipeline{
         script {
             if (targetBranch == 'staging') {
                 sh "docker build -t ${STAGING_TAG} ."
-            } else if (targetBranch == 'main') {
+            } else if (targetBranch == 'develop') {
                 sh "docker build -t ${PROD_TAG} ."
             } else if (targetBranch == 'develop') {
                 sh "docker build -t ${DEV_TAG} ."
@@ -97,7 +97,7 @@ pipeline{
         }
       }
         steps{
-            withCredentials([usernamePassword(credentialsId: 'f18ff6f7-97db-4dbe-9f50-5cf7bfa5657d', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+            withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
             sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
             }
         }
@@ -136,7 +136,7 @@ pipeline{
 	    stage('Deploy to Prod') {
             when {
                 expression { 
-			(params.CHANGE_ID != null)  && (targetBranch == 'main')
+			(params.CHANGE_ID != null)  && (targetBranch == 'develop')
 		}
             }
            steps {  

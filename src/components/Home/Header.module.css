@@ -240,3 +240,314 @@ input[type="text"]::placeholder {
 .item {
   margin-right: 50px; /* Ajoute une marge à droite à chaque élément */
 }
+.search-input::placeholder {
+  color: black; /* Définir la couleur du placeholder en noir */
+}
+/* Header.module.css */
+.searchForm {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: #fff;
+  border-radius: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.searchSelect {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 14px;
+  flex: 1;
+  padding: 10px;
+}
+
+.searchButton {
+  border-radius: 30px;
+  font-weight: bold;
+  background-color: #FA8072;
+  padding: 10px 20px;
+  margin-left: 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  z-index: 1000;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 999;
+}
+
+.suggestionsList {
+  list-style: none;
+  padding: 0;
+}
+
+.suggestionItem {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.suggestionItem:hover {
+  background-color: #f0f0f0;
+}
+
+/* Add these styles to your Header.module.css */
+.suggestions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 90%;
+  margin: auto;
+}
+
+.suggestion-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px; /* Space between suggestion items */
+}
+
+.suggestionsList {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 50px;
+}
+
+.suggestionImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.suggestionDetails {
+  text-align: center;
+  white-space: normal;
+}
+
+.suggestionDetails h3 {
+  margin: 5px 0;
+}
+
+.suggestionDetails p {
+  margin: 3px 0;
+}
+/* Add these styles to your Header.module.css */
+.suggestions-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  max-width: 90%;
+  margin: auto;
+}
+
+.suggestion-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px; /* Added margin between suggestion items */
+}
+
+.suggestionsList {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 20px;
+}
+
+.suggestionImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.suggestionDetails {
+  text-align: center;
+  white-space: normal;
+}
+
+.suggestionDetails h3 {
+  margin: 5px 0;
+}
+
+.suggestionDetails p {
+  margin: 3px 0;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  max-width: 800px;
+  width: 90%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+button.close-button {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+button.close-button {
+  background-color: salmon;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.searchForm {
+  display: flex;
+  align-items: center;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center;
+}
+
+.searchSelect, .searchInput {
+  margin-right: 10px;
+}
+
+.searchButton {
+  background-color: #FA8072;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.restaurantCard {
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+  background: transparent;
+ 
+ 
+}
+
+.restaurantImage {
+  width: 50%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  margin-left: 25%;
+}
+
+.restaurantName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.restaurantAddress, .restaurantCuisine {
+  font-size: 1rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+.restaurantAddress .faMapMarkerAlt, .restaurantCuisine .faUtensils {
+  color: #FA8072;
+  margin-right: 5px;
+}
+
+.closeButton {
+  background-color: salmon;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto 0;
+}
+
+
+
+@media (max-width: 768px) {
+  .searchForm {
+    flex-direction: column;
+    padding: 5px;
+  }
+
+  .searchButton {
+    margin-left:60%;
+    margin-top: -40px;
+  }
+}

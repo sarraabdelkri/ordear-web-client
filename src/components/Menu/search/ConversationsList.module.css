@@ -1,0 +1,28 @@
+/* src/components/ConversationsList.css */
+
+.conversations-list {
+    width: 300px;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .conversations-list h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .conversations-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .conversations-list li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .conversations-list li:hover {
+    background-color: #f0f0f0;
+  }
+  

@@ -1,3 +1,4 @@
+import { Restaurant } from "@material-ui/icons";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = { cartData : [], total : 0 , tps : 0, tvq : 0}
@@ -10,8 +11,18 @@ const cartSlice = createSlice({
         state.total = action.payload.total
         state.cartData = action.payload.cartData
         state.tps = action.payload.convertedPriceTPS
-        state.tvq = action.payload.convertPriceTVQ
+        state.tvq = action.payload.convertedPriceTVQ
       },
+    
+    setTps(state, action) {
+      state.tps = action.payload;
+    },
+    setTvq(state, action) {
+      state.tvq = action.payload;
+    },
+    setTotal(state, action) {
+      state.total = action.payload;
+    },
       addToCart: (state, action) => {
         const existingItem = state.cartItems.find(item => item.id === action.payload.id);
         if (existingItem) {

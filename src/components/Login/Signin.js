@@ -59,6 +59,8 @@ function Signin() {
         dispatch(authActions.login(credentials.email));
         localStorage.setItem("userCredentials", JSON.stringify(credentials));
         localStorage.setItem("tokenLogin", responseData.tokenLogin);
+
+          localStorage.setItem("userId", responseData.user.id);
         toast.success("Vous êtes connecté", {
           style: {
             backgroundColor: "salmon",
@@ -249,7 +251,7 @@ function Signin() {
                   </div>
                   <div className="field" style={{  height:"10px"}}>
                       <ReCAPTCHA
-                        sitekey="6LdCUpMpAAAAAGsKJjIwRd8qAEDM7JiCD0Cq_tTv"
+                        sitekey="6LfmQuApAAAAAATqCAGdXDM_SemlGDv80qRBsNUX"
                         onChange={() => setIsLoaded(false)} 
                       />
                     </div> 
@@ -278,7 +280,7 @@ function Signin() {
                       <AiOutlineUserSwitch /> Connexion en tant qu'invité
                     </small>
                   </a>
-                            <GoogleLogin
+                            {/* <GoogleLogin
                   clientId={CLIENT_ID}
                   buttonText="Se connecter avec Google"
                   onSuccess={onSuccess}
@@ -286,7 +288,7 @@ function Signin() {
                   cookiePolicy={'single_host_origin'}
                   uxMode="redirect" // Utiliser la redirection au lieu de pop-up
                   redirectUri="http://localhost:3000" // Remplacez par votre URL de redirection
-                />
+                /> */}
                       <div className="login-buttons">
                         <button  className="google-login-btn">
                           <FcGoogle />

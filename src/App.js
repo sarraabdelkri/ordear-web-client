@@ -1,5 +1,7 @@
 import { Provider } from "react-redux";
+import React, { useEffect, useState } from "react";
 import store from "./store/store";
+import { Toaster } from 'react-hot-toast';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -31,6 +33,11 @@ import DishDetails from "./components/Menu/search/DishDetails";
 import Allergy from "./components/Menu/Allergy";
 import OrderDetials from "./components/Home/orderDetails";
 import WishlistPage from "./components/Menu/search/WishlistPage";
+import Notifications from "./components/Menu/search/Notifications";
+import ReclamationForm from "./components/Menu/search/ReclamationForm";
+import ReclamationList from "./components/Menu/search/ReclamationList";
+import Chat from "./components/Menu/search/Chat";
+import './index.css'; 
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,7 +45,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/search/:restaurantId", element: <SearchPage />},
       { path: "/dish-details/:productId", element: <DishDetails /> },
-      {path: "/orderdetails/:id", element: <OrderDetials />},
+      {path: "/orderdetails/:userId/:orderId", element: <OrderDetials />},
       { path: "/", element: <Navigate to="/home" /> },
       { path: "/home", element: <HomePage /> },
       { path: "/login", element: <LoginPage /> },
@@ -63,15 +70,37 @@ const router = createBrowserRouter([
       {path: "/cart", element: <Carts />},
       {path:"/Allergy", element: <Allergy/>},
       {path:"/wishlist", element: <WishlistPage/>},
+      {path:"/notifications", element: <Notifications/>},
+      {path:"/reclamation", element: <ReclamationForm/>},
+      {path:"/reclamationlist", element: <ReclamationList/>},
+      {path:"/chat", element: <Chat/>},
     ],
   },
 ]);
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000); // Spinner shows for 3 seconds
+  }, []);
+  if (loading) {
+    return (
+      <div className="spinner-container">
+        <img src="%PUBLIC_URL%/logo1.png" alt="Loading..." className="spinner-logo"/>
+      </div>
+    );
+  }
   return (
+    <>
+          <Toaster />
+
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
+    </>
   );
 }
 

@@ -1,0 +1,101 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 50px;
+}
+
+.app__specialMenu-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.headtext__cormorant {
+  font-size: 24px;
+  margin: 0;
+}
+
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.inputField {
+  width: calc(33.333% - 10px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  margin-left: 20%;
+}
+
+.customFileUpload {
+  display: inline-block;
+  cursor: pointer;
+  background-color: #ff7f7f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.customFileUpload span {
+  pointer-events: none;
+}
+
+.cameraButton {
+  background-color: #ff7f7f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.imagePreview {
+  display: block;
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.cameraContainer {
+  position: fixed;
+  top: 0;
+  left:0;
+}

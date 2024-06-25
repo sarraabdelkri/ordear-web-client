@@ -31,7 +31,7 @@ function BestOfBest() {
   const navigate = useNavigate(); // Hook for navigation
 
   useEffect(() => {
-    axios.get('http://localhost:5555/restaurant/retrieveAll')
+    axios.get('https://backend.themenufy.com/restaurant/retrieveAll')
       .then(response => {
         setRestaurants(response.data);
       })
@@ -62,19 +62,15 @@ function BestOfBest() {
           <Slider {...settings}>
             {restaurants.map((restaurant) => (
               <div key={restaurant._id} className="text-center p-4">
-                <img
-                  src={restaurant.images} 
-                  alt={restaurant.nameRes}
-                  style={{
+                
+                 <img src={`https://backend.themenufy.com/uploads/resto/${restaurant.logo}`}   style={{
                     width: '100%', // Ensures image takes full width of the container
                     height: '200px', // Fixed height for all images
                     objectFit: 'cover', // Ensures the image covers the area without distorting aspect ratio
                     borderRadius: '15px', // Keeps your rounded corners
                     cursor: 'pointer' // Cursor indicates clickable items
-                  }}
-                  onClick={() => navigate(`/search/${restaurant._id}`)}
-                />
-             <h5 style={{ color: '#fff', textTransform: 'uppercase' ,marginTop:"20px"}}>{restaurant.nameRes}</h5>
+                  }} onClick={() => navigate(`/search/${restaurant._id}`)} />
+            
 
               </div>
             ))}

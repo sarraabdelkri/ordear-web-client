@@ -350,7 +350,6 @@ function MenuRest() {
   return (
     <div>
       <About />
-      <Home />
       <Dishes />
       <Testimonials />
       <Footer />

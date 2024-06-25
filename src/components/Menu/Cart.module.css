@@ -407,3 +407,121 @@
   font-weight: 800;
   
 }
+.modals{
+  
+  background-color: white;
+  min-width: 200px;
+  min-height: 400px;
+  width: 30%;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  max-height: 70%;
+  overflow: auto;
+  z-index: 100;
+}
+.inputs {
+  max-width: 380px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 10px 5;
+  margin-left: 5%;
+  height: 55px;
+  border-radius: 55px;
+  padding: 15px;
+  border: none;
+  outline: none;
+  margin-top: 30px;
+}
+.statrs {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  margin-left: 30%;
+}
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeIcon {
+  cursor: pointer;
+}
+
+.reactStars {
+  margin-bottom: 10px;
+}
+
+.textArea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.tips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tip, .selectedTip {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.selectedTip {
+  background-color: #ffd700;
+}
+
+.tipInput {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cancelButton, .submitButton {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancelButton {
+  background-color: #ccc;
+}
+
+.submitButton {
+  background-color: #4CAF50;
+  color: white;
+}

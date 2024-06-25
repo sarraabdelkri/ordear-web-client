@@ -7,8 +7,10 @@ import backgroundImage from '../../../assets/full-bg.png';
 import './Dishes.css';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { toast } from 'react-hot-toast'; // Ensure you use react-hot-toast
+import { useSelector } from 'react-redux'; // Import useSelector for Redux state
 
-function Dishes() {
+function Dishes({ dishes }) {
   const { restaurantId } = useParams();
   const [categories, setCategories] = useState([]);
   const [menuName, setMenuName] = useState('');
@@ -20,18 +22,71 @@ function Dishes() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
+  const cartData = useSelector((state) => state.cart); 
+  // Access Redux state
+
+  // Store restaurant ID in local storage when the component is mounted
+  useEffect(() => {
+    if (restaurantId) {
+      console.log("Restaurant ID from URL:", restaurantId);
+      localStorage.setItem('restaurantId', restaurantId);
+    }
+  }, [restaurantId]);
+
   console.log('Restaurant ID:', restaurantId);
 
-  const addToCart = (item) => {
-    const existingItemIndex = cartItems.findIndex(cartItem => cartItem.id === item.id);
-    if (existingItemIndex !== -1) {
-      const updatedCartItems = [...cartItems];
-      updatedCartItems[existingItemIndex].quantity += 1;
-      setCartItems(updatedCartItems);
-    } else {
-      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+  const addToCart = async (product) => {
+    if (!product) {
+      toast.error('Product details not available');
+      return;
+    }
+  
+    const userId = localStorage.getItem("userId");
+    const userPass = userId || "000000000000000000000000";
+  
+    const storedRestaurantId = localStorage.getItem('restaurantId');
+  
+    if (!storedRestaurantId) {
+      console.error('Restaurant ID is missing');
+      toast.error('Restaurant ID is missing');
+      return;
+    }
+  
+    console.log('Adding to cart with restaurant ID:', storedRestaurantId);
+  
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/cart/addtocartweb/${userPass}`,
+        {
+          productFK: product._id,
+          quantity: 1,
+          restaurantFK: storedRestaurantId,
+        },
+        { withCredentials: true }
+      );
+  
+      if (response.status === 200) {
+        toast.success("Product added to cart!");
+        const updatedCartItems = [...cartItems];
+        const existingItemIndex = updatedCartItems.findIndex(item => item._id === product._id);
+        if (existingItemIndex !== -1) {
+          updatedCartItems[existingItemIndex].quantity += 1;
+        } else {
+          updatedCartItems.push({ ...product, quantity: 1 });
+        }
+        setCartItems(updatedCartItems);
+  
+        const cartId = response.data.cartId;
+        localStorage.setItem('cartTrash', cartId); // Stocker l'ID du cartTrash dans localStorage
+      } else {
+        throw new Error('Failed to add product to cart');
+      }
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+      toast.error(error.message || "An error occurred while adding product to cart");
     }
   };
+  
 
   useEffect(() => {
     const fetchMenuData = async () => {
@@ -116,18 +171,6 @@ function Dishes() {
     fetchRestaurant();
   }, [restaurantId]);
 
-  const lightenColor = (color) => {
-    const rgb = parseInt(color.substring(1), 16);
-    const r = (rgb >> 16) & 0xff;
-    const g = (rgb >> 8) & 0xff;
-    const b = (rgb >> 0) & 0xff;
-    const newR = Math.min(r + 50, 255);
-    const newG = Math.min(g + 50, 255);
-    const newB = Math.min(b + 50, 255);
-    const newColor = "#" + ((1 << 24) + (newR << 16) + (newG << 8) + newB).toString(16).slice(1);
-    return newColor;
-  };
-
   const handlePriceFilter = (range) => {
     setPriceRange(range);
     const filteredProducts = productList.filter(product => product.price >= range[0] && product.price <= range[1]);
@@ -140,7 +183,7 @@ function Dishes() {
   return (
     <section className="py-3 py-md-5 py-xl-8">
       {restaurantData && (
-        <div className="home-container" style={{ backgroundImage: `url(${backgroundImage})`, marginTop: 0 }}>
+        <div className="home-container" style={{ backgroundImage: "white", marginTop: 0 }}>
           <div className="app__specialMenu flex__center section__padding" id="menu">
             <div className="app__specialMenu-title" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginTop: "50px" }}>
               <SubHeading title="Menu that fits your palette" />
@@ -148,11 +191,11 @@ function Dishes() {
             </div>
           </div>
           <div className="categories" style={{ display: 'flex', justifyContent: 'center', marginTop: "30px", marginBottom: "30px", flexWrap: 'wrap' }}>
-            <button style={{ margin: '10px', borderRadius: "10px", backgroundColor: lightenColor(restaurantData.color), color: "#333", padding: "10px 20px" }} onClick={fetchAllProducts}>
+            <button style={{ margin: '10px', borderRadius: "10px", backgroundColor: restaurantData.color, color: "#333", padding: "10px 20px" }} onClick={fetchAllProducts}>
               All
             </button>
             {categories.map((category, index) => (
-              <button key={index} style={{ margin: '10px', borderRadius: "10px", backgroundColor: lightenColor(restaurantData.color), color: "#333", padding: "10px 20px" }} onClick={() => handleCategoryClick(category._id)}>
+              <button key={index} style={{ margin: '10px', borderRadius: "10px", backgroundColor: restaurantData.color, color: "#333", padding: "10px 20px" }} onClick={() => handleCategoryClick(category._id)}>
                 {category.libelle}
               </button>
             ))}
@@ -164,8 +207,8 @@ function Dishes() {
                 defaultValue={[0, 100]} // Change this value according to your default price range
                 onChange={handlePriceFilter}
                 value={priceRange}
-                trackStyle={[{ backgroundColor: lightenColor(restaurantData.color) }]}
-                handleStyle={[{ borderColor: lightenColor(restaurantData.color) }]}
+                trackStyle={[{ backgroundColor: restaurantData.color }]}
+                handleStyle={[{ borderColor:restaurantData.color }]}
               />
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ width: '50px', textAlign: 'center' }}>${priceRange[0]}</span>
@@ -186,7 +229,7 @@ function Dishes() {
           </div>
           <div className="pagination" style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
             {[...Array(totalPages)].map((_, index) => (
-              <button key={index} style={{ margin: '0 5px', padding: '5px 10px', borderRadius: '5px', backgroundColor: lightenColor(restaurantData.color) }} onClick={() => setCurrentPage(index + 1)}>
+              <button key={index} style={{ margin: '0 5px', padding: '5px 10px', borderRadius: '5px', backgroundColor: restaurantData.color }} onClick={() => setCurrentPage(index + 1)}>
                 {index + 1}
               </button>
             ))}

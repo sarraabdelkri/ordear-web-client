@@ -1,58 +1,72 @@
-.home-container {
-  text-align: center;
-  padding: 0 20px;
-}
-
-.home-banner-container {
+.homeContainer {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.homeBannerContainer {
+  flex: 1;
+  display: flex;
   justify-content: center;
-  min-height: 70vh; /* Adjust this value as needed */
-  width: 100%; /* Ensure it takes full width */
+  align-items: center;
+  position: relative;
 }
 
-.home-text-section {
-  max-width: 70%;
-  font-family: var(--font-base);
-  color: #DCCA87;
+.homeTextSection {
   text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.5); /* To ensure text visibility */
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.primary-heading {
-  display: inline-block;
-  white-space: nowrap;
-  margin-left: 50%;
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.primary-text {
-  margin: 10px 0;
-  margin-left: -55550%;
+.logo {
+  max-width: 100px;
 }
-.primary-textt {
-  margin: 10px 0;
-  margin-left: -50%;
+
+.primaryHeading {
+  font-size: 3em;
+  margin: 0 0 20px;
 }
-.address-container {
+
+.primaryText {
+  font-size: 1.5em;
+  margin: 0 0 10px;
+}
+
+.addressContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px 0;
 }
 
-.address-icon {
-  margin-right: 0.5rem;
-  margin-left: -30%;
+.addressIcon {
+  margin-right: 10px;
 }
 
-.secondary-button {
-  color: white;
-  background-color: #FA8072;
-  margin-top: 30px;
-  padding: 10px 20px;
+.secondaryButton {
+  background-color: #DD5746;
   border: none;
+  padding: 15px 30px;
+  color: #fff;
+  font-size: 1.2em;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+
+.secondaryButton:hover {
+  background-color: #FF6F61;
+}
+
 
 @media (min-width: 768px) {
   .home-text-section {

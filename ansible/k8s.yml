@@ -6,16 +6,17 @@
   tasks:
     - name: Create deployment
       k8s:
+        kubeconfig: "~/.kube/config"
         api_version: apps/v1
         kind: Deployment
         name: ordear-webclient-deployment
-        namespace: ordear
+        namespace: themenufy
         definition:
           metadata:
             labels:
               app: ordearclient-app
           spec:
-            replicas: 1
+            replicas: 2
             selector:
               matchLabels:
                 app: ordearclient-app
@@ -26,19 +27,23 @@
               spec:
                 containers:
                   - name: ordear-client
-                    image: samarcherni/ordearwebclient:v1.0.11-prod
+                    image: taharejeb97/ordearwebclient:v2.2.9-prod
                     imagePullPolicy: Always
                     ports:
-                      - containerPort: 3000
+                      - containerPort: 3000   
                     env:
                       - name: REACT_APP_BACKEND_URL
-                        value: "http://185.192.96.18:31302"
+                        # value: "https://backend.themenufy.com"
+        context: "kubernetes-admin@kubernetes"
+        api_key: "kubeconfig-user-tz4cgnc87h:c5bblz84ddpxbmbnr9wf6fn5n4rw8k8xdn4t4wjgwcj7xq9fzxprsg"
+        verify_ssl: false
     - name: Create service
       k8s:
+        kubeconfig: "~/.kube/config"
         api_version: v1
         kind: Service
         name: ordear-webclient-service
-        namespace: ordear
+        namespace: themenufy
         definition:
           metadata:
             labels:
@@ -47,7 +52,9 @@
             selector:
               app: ordearclient-app
             ports:
-              - protocol: TCP
+              - name: http
+                protocol: TCP
                 port: 4048
                 targetPort: 3000
-            type: LoadBalancer
+                nodePort: 31698
+            type: NodePort

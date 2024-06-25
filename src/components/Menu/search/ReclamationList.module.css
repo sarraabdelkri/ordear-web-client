@@ -1,0 +1,74 @@
+.notificationsContainer {
+  padding: 20px;
+  background-color: transparent;
+  margin-top: 5%;
+  width: 50%;
+  margin-left: 20%;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  display: block;
+  align-items: center;
+  margin-left: 45%;
+}
+
+.error {
+  color: red;
+  margin-bottom: 20px;
+}
+
+.notificationItem {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.notificationHeader {
+  display: flex;
+  align-items: center;
+}
+
+.notificationImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.notificationTitleContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.notificationTitle {
+  font-size: 18px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.notificationBody {
+  margin-top: 10px;
+}
+
+.notificationType {
+  font-size: 16px;
+  margin: 0;
+  color: #333;
+}
+
+.notificationMessage {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.notificationDate {
+  font-size: 12px;
+  color: #999;
+}

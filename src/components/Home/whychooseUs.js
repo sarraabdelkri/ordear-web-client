@@ -44,7 +44,7 @@ const WhyChooseUs = () => {
             box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.10);
             transition: 0.5s;
             position: relative;
-            background-color: #333;
+            background-color: #ffcbcb;
             max-height: 230px;
             overflow: hidden;
             margin-bottom: 30px;

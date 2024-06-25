@@ -1,134 +1,147 @@
-
-
-
-/* Гамбургер иконка */
-.menu-btn {
-	width: 30px;
-	height: 30px;
-	position: relative;
-	z-index:2;
-	overflow: hidden;
-}
-
-.menu-btn .bar {
-	width: 30px;
-	height: 4px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-    border-radius: 4px;
-	transform: translate(-50%, -50%);
-	background-color: #FA8072;
-	transition: all 0.3s ease-in-out;
-}
-
-.menu-btn .bar:nth-of-type(2) {
-	top: calc(50% - 9px);
-}
-.menu-btn .bar:nth-of-type(3) {
-	top: calc(50% + 9px);
-}
-
-/* Меняем гамбургер иконку, когда меню открыто */
-.menu-btn.active .bar:nth-of-type(1) {
-  display: none;
-}
-.menu-btn.active .bar:nth-of-type(2) {
-  top: 50%;
-  transform: translate(-50%, 0%) rotate(45deg);  
-}
-.menu-btn.active .bar:nth-of-type(3) {
-  top: 50%;
-  transform: translate(-50%, 0%) rotate(-45deg); 
-}
-
-/* Меню, которое будет появляться */
-.nav_ {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 20%;
-	height: 100vh;
-	padding: 15px;
-    background: #ea9999;
-	opacity: 0.7;   
-	transform: translateX(-100%);
-	transition: transform 0.5s; 
-}
-
-.nav_.active {
-	transform: translateX(0);
-}
-
-.nav_ .nav__list_item {
-	list-style-type: none;
-}
-
-.button-30 {
-	align-items: center;
-	appearance: none;
-	background-color: #FA8072;
-	border-radius: 4px;
-	border-width: 0;
-	box-sizing: border-box;
-	color: #fff;
-	cursor: pointer;
-	display: inline-flex;
-	font-family: "JetBrains Mono",monospace;
-	height: 35px;
-	justify-content: center;
-	line-height: 1;
-	list-style: none;
-	overflow: hidden;
-	padding-left: 10px;
-	padding-right: 10px;
-	position: relative;
-	text-align: left;
-	text-decoration: none;
-	transition: box-shadow .15s,transform .15s;
-	user-select: none;
-	-webkit-user-select: none;
-	touch-action: manipulation;
-	white-space: nowrap;
-	will-change: box-shadow,transform;
-	font-size: 15px;
+/* Navs.module.css */
+.navbarContainer {
+    width: 100%;
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
   }
-  .button-40 {
-	align-items: center;
-	appearance: none;
-	background-color: #fff;
-	border-radius: 4px;
-	border-width: 0;
-	box-sizing: border-box;
-	color: #fff;
-	cursor: pointer;
-	display: inline-flex;
-	font-family: "JetBrains Mono",monospace;
-	height: 48px;
-	justify-content: center;
-	line-height: 1;
-	list-style: none;
-	overflow: hidden;
-	padding-left: 16px;
-	padding-right: 16px;
-	position: relative;
-	text-align: left;
-	text-decoration: none;
-	transition: box-shadow .15s,transform .15s;
-	user-select: none;
-	-webkit-user-select: none;
-	touch-action: manipulation;
-	white-space: nowrap;
-	will-change: box-shadow,transform;
-	font-size: 18px;
-  }
-  .link-salmon {
-    color: #FA8072; 
-  }
- 
   
-  .flag-icon {
-	width: 10px; /* Définir la largeur des icônes de drapeau */
-	height: auto; /* Garder le rapport hauteur-largeur pour éviter l'étirement */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  
+  .logo img {
+    width: 120px;
+  }
+  
+  .navLinks {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+  
+  .navLinks li {
+    position: relative;
+  }
+  
+  .navLinks a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .navLinks a:hover,
+  .navLinks a.active {
+    color: #ffa500;
+  }
+  
+  .navActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .navLink {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  .icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  .menuToggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 0.5rem;
+  }
+  
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .userDropdown {
+    position: relative;
+  }
+  
+  .userDropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    color: black;
+    width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    padding: 0.5rem 0;
+  }
+  
+  .userDropdownMenu.show {
+    display: flex;
+  }
+  
+  .userDropdownMenu a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .userDropdownMenu a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .navLinks {
+      position: absolute;
+      top: 70px;
+      left: -100%;
+      flex-direction: column;
+      background-color: rgba(255, 87, 34, 0.9);
+      width: 100%;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s ease;
+    }
+  
+    .navLinks.navActive {
+      left: 0;
+    }
+  
+    .navActions {
+      display: none;
+    }
+  
+    .menuToggle {
+      display: flex;
+    }
+  
+    .navbar.open .bar:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+  
+    .navbar.open .bar:nth-child(2) {
+      opacity: 0;
+    }
+  
+    .navbar.open .bar:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
   }
   

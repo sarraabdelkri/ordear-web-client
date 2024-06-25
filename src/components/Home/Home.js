@@ -14,7 +14,7 @@ import { FaCamera } from 'react-icons/fa';
 import { FaRegMessage } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import Orders from "./orders";
-
+import Toast from "./Toast";
 import { useSelector } from "react-redux";
 import Mapevent from "./Map/mapevent";
 
@@ -45,6 +45,9 @@ const Home = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [showIcon, setShowIcon] = useState(false);
+ 
+  const [toastMessage, setToastMessage] = useState('');
+
   const incrementDuration = 2000; // 2000 milliseconds (2 seconds)
   useEffect(() => {
     const incrementInterval1 = setInterval(() => {
@@ -95,7 +98,20 @@ const Home = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  const [showToast, setShowToast] = useState(false);
 
+  useEffect(() => {
+    const socket = new WebSocket('ws://your-backend-url.com/ws/orders');
+
+    socket.onmessage = function(event) {
+      const data = JSON.parse(event.data);
+      if (data.status === 'ready') {
+        setShowToast(true);  // Show toast notification when order is ready
+      }
+    };
+
+    return () => socket.close();  // Clean up the socket when the component unmounts
+  }, []);
   return (
     <>
       <section className={styles.firstPage}>
@@ -123,7 +139,7 @@ const Home = () => {
             
         <Header />
         {isAuth && <Orders />}
-       
+        {showToast && <Toast message="Your order is ready! Please pick it up." onClose={() => setShowToast(false)} />}
        
           {!isAuth && <AboutUs/>}
           <BestOfBest/>

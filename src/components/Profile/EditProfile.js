@@ -63,8 +63,9 @@ const EditProfile = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const userId = localStorage.getItem("userId");
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/updateUser`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/user/${userId}/update`,
         {
           method: "PUT",
           headers: {
@@ -88,6 +89,7 @@ const EditProfile = (props) => {
       toast.error(err.message);
     }
   };
+
 
   const handleVerificationSubmit = async (e) => {
     e.preventDefault();
@@ -194,27 +196,34 @@ const EditProfile = (props) => {
     }
   };
 
-  const getImage = async () => {
-    try {
+const getImage = async () => {
+  try {
+      const userId = localStorage.getItem('userId'); // Récupérer userId depuis le localStorage
+
+      if (!userId) {
+          throw new Error("User ID not found in local storage");
+      }
+
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/getImage`,
-        {
-          credentials: "include",
-        }
+          `${process.env.REACT_APP_BACKEND_URL}/user/getImageByUserId/${userId}`,
+          {
+              credentials: "include",
+          }
       );
 
       if (!response.ok) {
-        const responseData = await response.json();
-        throw new Error(responseData.message || responseData.error);
+          const responseData = await response.json();
+          throw new Error(responseData.message || responseData.error);
       } else {
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        setImage(url);
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          setImage(url);
       }
-    } catch (err) {
+  } catch (err) {
       console.log(err.message);
-    }
-  };
+  }
+};
+
 
   useEffect(() => {
     getImage();

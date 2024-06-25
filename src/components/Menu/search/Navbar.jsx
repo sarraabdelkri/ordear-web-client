@@ -20,6 +20,7 @@ import { Home as HomeIcon, Info as InfoIcon, CommentRounded as CommentRoundedIco
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast"; 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [openCart, setOpenCart] = useState(false);
@@ -29,6 +30,7 @@ const Navbar = () => {
   const isAuth = useSelector(state => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [cartTrash, setCartTrash] = useState(null);
 
   const handleCartClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -45,22 +47,46 @@ const Navbar = () => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  const fetchCart = async() => {
+  const fetchCart = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/cart/get/cartTrashweb/by/user`,{
-        credentials : "include"
-      });
+      // Récupérer l'ID utilisateur depuis le localStorage
+      const userId = localStorage.getItem("userId");
+  
+      if (!userId) {
+        throw new Error("User not found in localStorage");
+      }
+  
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/cart/get/cartTrashweb/by/user/${userId}`,
+        {
+          credentials: "include",
+        }
+      );
+  
       const responseData = await response.json();
+      console.log(responseData);
+  
       if (!response.ok) {
         throw new Error("cart doesn't exist");
       } else {
         dispatch(cartActions.setCart(responseData));
+        setCartTrash(responseData?.cartData[0]?._id);
       }
     } catch (err) {
-      console.error(err.message);
+      toast.error(err.message, {
+        style: {
+          border: "1px solid #81007F",
+          padding: "16px",
+          color: "#81007F",
+        },
+        iconTheme: {
+          primary: "#81007F",
+          secondary: "#D6C7D4",
+        },
+      });
     }
   };
-
+  
   const total = useSelector(state => state.cart.total);
 
   useEffect(() => {

@@ -28,7 +28,9 @@ const EditPassword = (props) => {
 
   const fetchEditPassword = async () => {
     try {
+      const userId = localStorage.getItem("userId");
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#]).{6,}$/;
+      
       if (!passwordRegex.test(password)) {
         throw new Error("Le mot de passe doit contenir au moins 6 caractères avec au moins une lettre minuscule, une lettre majuscule et un caractère spécial parmi '@' et '#' ");
       }
@@ -36,13 +38,13 @@ const EditPassword = (props) => {
       if (oldPassword === password) {
         throw new Error("Le nouveau mot de passe doit être différent de l'ancien mot de passe.");
       }
+      
       if (passwordStrength < 3) {
-        throw new Error(
-          "Le mot de passe est trop faible. Veuillez choisir un mot de passe plus sécurisé."
-        );
+        throw new Error("Le mot de passe est trop faible. Veuillez choisir un mot de passe plus sécurisé.");
       }
+      
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/updatePasswordWeb`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/${userId}/updatePassword`,
         {
           method: "PUT",
           headers: {
@@ -56,7 +58,9 @@ const EditPassword = (props) => {
           }),
         }
       );
+      
       const responseData = await response.json();
+      
       if (!response.ok) {
         throw new Error(responseData.message || responseData.error);
       } else {
@@ -74,7 +78,7 @@ const EditPassword = (props) => {
         setShowConfirmation(true);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       toast.error(err.message, {
         style: {
           border: "1px solid #FA8072",
@@ -88,7 +92,7 @@ const EditPassword = (props) => {
       });
     }
   };
-
+  
   const logout = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/logout`, {

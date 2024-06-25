@@ -4,7 +4,7 @@ function Copyright() {
   return (
     <div className="d-block justify-content-center align-items-center">
       <div className={styles.copyright}>
-        © {new Date().getFullYear()} IPACT Consult  Alright Reserved
+        © {new Date().getFullYear()} IPACT Consult  Alrights Reserved
         <div className="pt-2"></div>
 
       </div>

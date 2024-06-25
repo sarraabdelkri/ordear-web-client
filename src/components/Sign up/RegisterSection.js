@@ -41,19 +41,17 @@ function RegisterSection() {
       type: "CHANGE_INPUT",
       payload: { name, value },
     });
-    updatePasswordStrength(value);
+    if (name === "password") {
+      updatePasswordStrength(value);
+    }
   };
+
   const updatePasswordStrength = (password) => {
     let strength = 0;
-    
     if (password.length >= 6) strength += 1;
-   
     if (/[a-z]/.test(password)) strength += 1;
-    
     if (/[A-Z]/.test(password)) strength += 1;
-    
     if (/[*@#]/.test(password)) strength += 1;
-  
     setPasswordStrength(strength);
   };
 
@@ -76,7 +74,7 @@ function RegisterSection() {
   const fetchSignup = async (e) => {
     e.preventDefault();
     setIsLoaded(true);
-    
+
     if (state.password.length < 6) {
       toast.error("Le mot de passe doit contenir au moins 6 caractères", {
         style: {
@@ -93,9 +91,9 @@ function RegisterSection() {
       setTimeout(() => {
         setIsLoaded(false);
       }, 2000);
-      return; 
+      return;
     }
-  
+
     if (state.password !== state.passwordVerify) {
       toast.error("Les mots de passe ne correspondent pas", {
         style: {
@@ -111,9 +109,9 @@ function RegisterSection() {
       setTimeout(() => {
         setIsLoaded(false);
       }, 2000);
-      return; 
+      return;
     }
-  
+
     const containsLowercase = /[a-z]/.test(state.password);
     const containsUppercase = /[A-Z]/.test(state.password);
     const containsSpecialChars = /[@#]/.test(state.password);
@@ -137,7 +135,7 @@ function RegisterSection() {
       setTimeout(() => {
         setIsLoaded(false);
       }, 2000);
-      return; 
+      return;
     }
 
     if (!containsLowercase || !containsUppercase) {
@@ -159,8 +157,9 @@ function RegisterSection() {
       setTimeout(() => {
         setIsLoaded(false);
       }, 2000);
-      return; 
-    }    
+      return;
+    }
+
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/auth/registerClientWeb`,
@@ -178,6 +177,16 @@ function RegisterSection() {
       if (!response.ok) {
         throw new Error(responseData.message || responseData.error);
       } else {
+        // Enregistrer les informations de l'utilisateur dans le local storage
+        localStorage.setItem(
+          "userCredentials",
+          JSON.stringify({
+            firstName: state.firstName,
+            lastName: state.lastName,
+            email: state.email,
+          })
+        );
+
         const toast1 = toast.success(responseData.message, {
           style: {
             border: "1px solid #FA8072",
@@ -211,7 +220,7 @@ function RegisterSection() {
       setIsLoaded(false);
     }
   };
- 
+
   const toggleModal = () => {
     setShowPopup(!showPopup);
     fetchPrivacyPolicy();
@@ -219,20 +228,22 @@ function RegisterSection() {
 
   const fetchPrivacyPolicy = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/privacyPolicy`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/privacyPolicy`
+      );
       setPrivacyPolicy(response.data);
       setShowPopup(true);
     } catch (error) {
-      console.error("Erreur lors de la récupération de la politique de confidentialité :", error);
+      console.error(
+        "Erreur lors de la récupération de la politique de confidentialité :",
+        error
+      );
     }
   };
-  
-
 
   const handleClosePopup = () => {
     setShowPopup(false);
   };
-
   return (
     <React.Fragment>
       <Toaster />

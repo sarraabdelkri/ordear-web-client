@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Importez axios ici s'il n'est pas déjà importé
 import backgroundImage from "../../assets/body-bg.jpg";
-import OriginalLogo from "../../assets/logo44 (1).png";
+import OriginalLogo from "../../assets/logo11.png";
 import  "./AboutUs.module.css";
 import logo from "../../assets/restaurant-gallery-1.jpg";
 import logo2 from "../../assets/restaurant-gallery.jpg";

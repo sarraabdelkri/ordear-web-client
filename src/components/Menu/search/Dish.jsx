@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as solidHeart, faHeart as regularHeart } from "@fortawesome/free-solid-svg-icons";
+
 import { Link } from 'react-router-dom';
 import './Dish.css'; 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import Slider from 'react-slick';
 import { useSelector, useDispatch } from 'react-redux';
 import { wishlistActions } from '../../../store/wishlistSlice';
 
@@ -18,7 +19,7 @@ function Dish({ product }) {
   const restaurantId = useSelector(state => state.restaurant.restaurantId);
   const tableNb = useSelector(state => state.restaurant.tableNb);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const userId = useSelector(state => state.auth.userId); // Récupérer le userId depuis le state auth
+  const userId = useSelector(state => state.auth.userId);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,19 +30,61 @@ function Dish({ product }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleAddToCart = async () => {
+  const handleFavoriteClick = async () => {
+    if (!isAuthenticated) {
+      toast.error("Please log in to update your wishlist.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/product/users/${userId}/wishlist/${dish._id}`,
+        { isFavorited: !dish.isFavorited },
+        { withCredentials: true }
+      );
+
+      if (response.status === 200) {
+        const updatedIsFavorited = !dish.isFavorited;
+        setDish(prevDish => ({ ...prevDish, isFavorited: updatedIsFavorited }));
+        dispatch(wishlistActions.toggleWishlist({ ...dish, isFavorited: updatedIsFavorited }));
+        toast.success(updatedIsFavorited ? "Added to wishlist!" : "Removed from wishlist!");
+      } else {
+        throw new Error('Failed to update wishlist');
+      }
+    } catch (error) {
+      console.error('Error updating wishlist:', error);
+      toast.error("Error updating wishlist.");
+    }
+  };
+  
+  const addToCart = async () => {
     if (!dish) {
       toast.error('Dish details not available');
       return;
     }
 
+    const userId = localStorage.getItem("userId");
+    const userPass = userId || "000000000000000000000000";
+    const storedRestaurantId = localStorage.getItem('restaurantId');
+
+    if (!storedRestaurantId) {
+      console.error('Restaurant ID is missing');
+      toast.error('Restaurant ID is missing');
+      return;
+    }
+
+    console.log('Adding product to cart:', dish); // Log the product being added to the cart
+
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/cart/addproduct`, {
-        productFK: dish._id,
-        quantity,
-        restaurantFK: restaurantId,
-        tableNb: tableNb,
-      }, { withCredentials: true });
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/cart/addtocartweb/${userPass}`,
+        {
+          productFK: dish._id,
+          quantity: 1,
+          restaurantFK: storedRestaurantId,
+        },
+        { withCredentials: true }
+      );
 
       if (response.status === 200) {
         toast.success("Product added to cart!");
@@ -54,57 +97,16 @@ function Dish({ product }) {
     }
   };
 
-  const handleFavoriteClick = async () => {
-    console.log('Adding to wishlist:', dish._id); // Log the product ID
-    console.log('User ID:', userId); // Log the user ID
-
-    if (!userId) {
-      toast.error("User not logged in");
-      return;
-    }
-
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/product/users/${userId}/wishlist/${dish._id}`, {}, { withCredentials: true });
-      console.log('Response from server:', response); // Log the server response
-
-      if (response.status === 200) {
-        setDish(prevDish => ({ ...prevDish, isFavorited: !prevDish.isFavorited }));
-        dispatch(wishlistActions.addToWishlist(dish));
-        toast.success("Product added to wishlist!");
-      } else {
-        throw new Error('Failed to add product to wishlist');
-      }
-    } catch (error) {
-      console.error('Error adding product to wishlist:', error);
-      toast.error(error.message || "An error occurred while adding product to wishlist");
-    }
-  };
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    adaptiveHeight: true,
-    responsive: [
-      {
-        breakpoint: 768, 
-        settings: { slidesToShow: 1 }
-      }
-    ]
-  };
-
   return (
-    <div className="container my-5">
+    <div className="containers my-5">
       {dish && (
-        <div className="card mb-3" style={{ maxWidth: isMobile ? '100%' : '300px', margin: 'auto' }}>
-          <div className="card-header bg-transparent">
+        <div className="cards">
+          <div className="card-headers bg-transparent">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <FontAwesomeIcon
+            <FontAwesomeIcon
                 icon={dish.isFavorited ? solidHeart : regularHeart}
-                style={{ color: 'red' }}
                 onClick={handleFavoriteClick}
+                style={{ color: dish.isFavorited ? 'red' : 'gray', cursor: 'pointer' }}
               />
               <span>Today's Offer</span>
               {dish.promotion > 0 && (
@@ -112,13 +114,13 @@ function Dish({ product }) {
               )}
             </div>
           </div>
-          <div className="card-body">
-            <img src={dish.photo} alt={dish.name} className="img-fluid" style={{ marginBottom: '10px', width: "70%", alignContent: "center" }} />
+          <div className="card-bodys">
+            <img src={dish.photo} alt={dish.name} className="img-fluid" />
             <h5>{dish.name.toUpperCase()}</h5>
             <p>${dish.price}</p>
             <p>Description: {dish.description}</p>
-            <div className="btn-group" style={{ width: '100%' }}>
-              <button style={{ color: 'white', background: 'salmon' }} onClick={handleAddToCart}>Add to cart</button>
+            <div className="btn-group">
+              <button style={{ color: 'white', background: 'salmon' }} onClick={addToCart}>Add to cart</button>
               <Link to={`/dish-details/${dish._id}`} className="btn btn-link" style={{ color: 'salmon' }}>Details</Link>
             </div>
           </div>

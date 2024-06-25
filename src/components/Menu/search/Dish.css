@@ -1,7 +1,73 @@
 /* Dish.css */
-.card-header, .card-body {
-    padding: 15px;
-  }
+.containers {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cards {
+  width: 100%;
+  max-width: 300px;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 450px; /* Set a fixed height for uniformity */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-headers {
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.card-bodys {
+  flex-grow: 1;
+  padding: 15px;
+  display: block;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-bodys img {
+  width: 80%;
+  max-height: 150px; /* Set a fixed height for the image */
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.card-body h5 {
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.card-bodys p {
+  margin: 0.5rem 0;
+  flex-grow: 1; /* Ensure the description takes available space */
+}
+
+.card-bodys .btn-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.btn-group button,
+.btn-group .btn-link {
+  flex: 1;
+  text-align: center;
+  margin: 0 5px;
+  padding: 10px 0;
+}
+
   
   @media (max-width: 768px) {
     .card-header, .card-body {

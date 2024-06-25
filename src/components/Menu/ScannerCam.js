@@ -32,18 +32,23 @@ function ScannerWithCamera() {
 
   const handleError = (err) => {
     console.error("QR Scanner Error:", err);
-    if (err.name === 'NotAllowedError' || err.name === 'NotFoundError') {
+    if (err.name === 'NotAllowedError' || err.name === 'NotFoundError' || err.name === 'NotReadableError') {
       setHasCameraAccess(false);
     }
   };
 
   useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(() => setHasCameraAccess(true))
-      .catch(err => {
-        console.error("Camera access error:", err);
-        setHasCameraAccess(false);
-      });
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(() => setHasCameraAccess(true))
+        .catch(err => {
+          console.error("Camera access error:", err);
+          setHasCameraAccess(false);
+        });
+    } else {
+      console.error("getUserMedia is not supported on this browser.");
+      setHasCameraAccess(false);
+    }
   }, []);
 
   return (

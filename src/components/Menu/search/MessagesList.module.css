@@ -1,0 +1,38 @@
+/* src/components/MessagesList.css */
+
+.messages-list {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto; /* Pour permettre le défilement */
+}
+
+.messages-list h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.messages-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.messages-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.messages-list .message-sender {
+  text-align: right;
+  background-color: #e6ffe6;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+}
+
+.messages-list .message-receiver {
+  text-align: left;
+  background-color: #e6f0ff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+}

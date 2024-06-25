@@ -1,30 +1,19 @@
-// WishlistPage.js
-
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { wishlistActions } from '../../../store/wishlistSlice';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Navs from "../../Menu/search/Navbar";
+import Navs from "../../Navs/Navs";
 import Footer from "../../Footer/Footer";
 import './WishlistPage.css'; // Assurez-vous de créer ce fichier CSS
 
 const WishlistPage = () => {
   const wishlistItems = useSelector(state => state.wishlist.items);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const restaurantId = useSelector(state => state.restaurant.restaurantId);
   const tableNb = useSelector(state => state.restaurant.tableNb);
   const userId = useSelector(state => state.auth.userId); // Récupérer le userId depuis le state auth
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -64,27 +53,25 @@ const WishlistPage = () => {
   return (
     <div>
       <Navs></Navs>
-      <div className="wishlist-page container my-5">
-        <h2>Your Wishlist</h2>
+      <div className="wishlist-page container my-5"  >
+        <h2 style={{marginTop: "150px"}}>Your WishList</h2>
         {wishlistItems.length > 0 ? (
           <ul className="list-unstyled wishlist-list">
             {wishlistItems.map(item => (
               <li key={item._id} className="wishlist-item">
-                <div className="card mb-3" style={{ maxWidth: isMobile ? '100%' : '300px', margin: 'auto' }}>
+                <div className="card">
                   <div className="card-header bg-transparent">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span>Today's Offer</span>
-                      {item.promotion > 0 && (
-                        <span className="text-danger">{item.promotion}%</span>
-                      )}
-                    </div>
+                    <span>Today's Offer</span>
+                    {item.promotion > 0 && (
+                      <span className="text-danger">{item.promotion}%</span>
+                    )}
                   </div>
                   <div className="card-body">
-                    <img src={item.photo} alt={item.name} className="img-fluid" style={{ marginBottom: '10px', width: "70%", alignContent: "center" }} />
+                    <img src={item.photo} alt={item.name} className="img-fluid" />
                     <h5>{item.name.toUpperCase()}</h5>
                     <p>${item.price}</p>
                     <p>Description: {item.description}</p>
-                    <div className="btn-group" style={{ width: '100%' }}>
+                    <div className="btn-group">
                       <button style={{ color: 'white', background: 'salmon' }} onClick={() => handleAddToCart(item)}>Add to cart</button>
                       <Link to={`/dish-details/${item._id}`} className="btn btn-link" style={{ color: 'salmon' }}>Details</Link>
                     </div>
